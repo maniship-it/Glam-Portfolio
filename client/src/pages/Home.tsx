@@ -6,6 +6,7 @@ import Services from "@/components/sections/Services";
 import Testimonials from "@/components/sections/Testimonials";
 import InstagramFeed from "@/components/sections/InstagramFeed";
 import Footer from "@/components/layout/Footer";
+import FloatingChatbot from "@/components/FloatingChatbot";
 
 export default function Home() {
   return (
@@ -32,6 +33,7 @@ export default function Home() {
       
       <InstagramFeed />
       <Footer />
+      <FloatingChatbot />
     </main>
   );
 }

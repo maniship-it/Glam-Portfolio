@@ -4,11 +4,30 @@ import { BookingModal } from "@/components/BookingModal";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+
+      // Detect active section
+      const sections = ["portfolio", "services", "testimonials"];
+      let current = "";
+      
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // Adjust threshold based on typical header height
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            current = section;
+            break;
+          }
+        }
+      }
+      setActiveSection(current);
     };
+    
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -17,7 +36,7 @@ export default function Navbar() {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${
         scrolled 
-          ? "bg-background/80 backdrop-blur-lg border-white/10 py-3 shadow-lg" 
+          ? "bg-background/90 backdrop-blur-xl border-white/10 py-3 shadow-lg" 
           : "bg-transparent border-transparent py-5"
       }`}
     >
@@ -28,15 +47,31 @@ export default function Navbar() {
             <span className="italic font-light -ml-0.5">G</span>
           </div>
           <div className="font-serif text-xl tracking-tight hidden sm:block">
+            <h1 className="sr-only">Puja Glam Makeup Studio</h1>
             <span className="text-white">Puja</span>
             <span className="text-primary italic">Glam</span>
           </div>
         </a>
 
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-          <a href="#portfolio" className="hover:text-primary transition-colors">Portfolio</a>
-          <a href="#services" className="hover:text-primary transition-colors">Services</a>
-          <a href="#testimonials" className="hover:text-primary transition-colors">Testimonials</a>
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
+          <a 
+            href="#portfolio" 
+            className={`transition-all duration-300 ${activeSection === 'portfolio' ? 'text-primary drop-shadow-[0_0_10px_rgba(220,178,106,0.8)] scale-105' : 'text-gray-300 hover:text-primary'}`}
+          >
+            Portfolio
+          </a>
+          <a 
+            href="#services" 
+            className={`transition-all duration-300 ${activeSection === 'services' ? 'text-primary drop-shadow-[0_0_10px_rgba(220,178,106,0.8)] scale-105' : 'text-gray-300 hover:text-primary'}`}
+          >
+            Services
+          </a>
+          <a 
+            href="#testimonials" 
+            className={`transition-all duration-300 ${activeSection === 'testimonials' ? 'text-primary drop-shadow-[0_0_10px_rgba(220,178,106,0.8)] scale-105' : 'text-gray-300 hover:text-primary'}`}
+          >
+            Testimonials
+          </a>
         </nav>
 
         <div className="flex items-center gap-4">
@@ -45,7 +80,7 @@ export default function Navbar() {
             target="_blank" 
             rel="noreferrer"
             className="hidden sm:flex text-gray-300 hover:text-primary transition-colors"
-            aria-label="Instagram"
+            aria-label="Follow Puja Glam on Instagram for daily makeup looks"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
           </a>

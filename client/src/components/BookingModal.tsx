@@ -14,7 +14,7 @@ export function BookingModal({ children, defaultService = "" }: { children: Reac
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const phoneNum = "919876543210"; // The studio's WhatsApp number
+    const phoneNum = "918210071659"; // Updated WhatsApp number
     
     const text = `Hi Puja Glam Makeup Studio!
 I would like to book a session.
@@ -35,7 +35,7 @@ Please let me know your availability.`;
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-[#080808] text-white border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)]">
+      <DialogContent className="sm:max-w-[425px] bg-[#080808] text-white border-white/10 shadow-[0_0_50px_rgba(0,0,0,0.8)] z-[100]">
         <DialogHeader>
           <DialogTitle className="text-2xl font-serif text-primary">Book Your Session</DialogTitle>
         </DialogHeader>
@@ -46,7 +46,7 @@ Please let me know your availability.`;
           </div>
           <div className="space-y-2">
             <Label htmlFor="phone" className="text-gray-300">Phone Number</Label>
-            <Input id="phone" type="tel" required value={phone} onChange={e => setPhone(e.target.value)} className="border-white/10 focus-visible:ring-primary bg-white/5 text-white" placeholder="+91 98765 43210" />
+            <Input id="phone" type="tel" required value={phone} onChange={e => setPhone(e.target.value)} className="border-white/10 focus-visible:ring-primary bg-white/5 text-white" placeholder="+91 82100 71659" />
           </div>
           <div className="space-y-2">
             <Label htmlFor="date" className="text-gray-300">Event Date</Label>
