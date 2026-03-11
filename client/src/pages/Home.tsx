@@ -19,8 +19,8 @@ export default function Home() {
       </div>
       
       <BeforeAfter 
-        beforeImage="/src/assets/images/before-after/before-1.jpg"
-        afterImage="/src/assets/images/before-after/after-1.jpg"
+        beforeImage="/src/assets/images/before-after/before-indian.jpg"
+        afterImage="/src/assets/images/before-after/after-indian.jpg"
       />
       
       <div id="services">

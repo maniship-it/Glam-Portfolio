@@ -1,4 +1,6 @@
 import { MapPin, Phone, Mail, Clock, Map } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 export default function Footer() {
   return (
@@ -17,7 +19,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-muted-foreground mb-6 max-w-sm">
-              Premium makeup artistry specializing in luxury bridal, editorial, and event glamour. Serving clients across Bihar, Jharkhand, and Delhi NCR with unparalleled service.
+              Premium makeup artistry specializing in luxury bridal, editorial, and event glamour. Serving clients across Bihar, Jharkhand, and Delhi NCR with unparalleled service. Certified from a reputed academy in Delhi.
             </p>
             <div className="flex gap-4">
               <a href="https://www.instagram.com/puja_glam_makeup_studio" aria-label="Instagram" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary transition-colors">
@@ -65,8 +67,50 @@ export default function Footer() {
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} Puja Glam Makeup Studio. Best Makeup Artist in Gaya, Bihar.</p>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <Dialog>
+              <DialogTrigger asChild>
+                <button className="hover:text-white transition-colors cursor-pointer">Privacy Policy</button>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl bg-[#0a0a0a] text-gray-300 border-white/10 max-h-[80vh] overflow-y-auto z-[100]">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-serif text-primary mb-4">Privacy Policy</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4 text-sm leading-relaxed">
+                  <p>Welcome to Puja Glam Makeup Studio. We are committed to protecting your privacy and ensuring the security of your personal information.</p>
+                  <h3 className="text-white font-medium text-lg mt-4">1. Information We Collect</h3>
+                  <p>We may collect personal information such as your name, contact details (phone number, email address), event date, and location when you book our services, use our website, or interact with our chatbot. Any images shared for reference or taken during sessions (with your consent) will be handled with strict confidentiality.</p>
+                  <h3 className="text-white font-medium text-lg mt-4">2. Use of Information</h3>
+                  <p>Your information is used to confirm bookings, provide our services, respond to queries, and occasionally send promotional updates related to our makeup academy or studio offers.</p>
+                  <h3 className="text-white font-medium text-lg mt-4">3. Data Sharing</h3>
+                  <p>We do not sell, trade, or rent your personal information to third parties. We may share information only with trusted service providers necessary for our operations (e.g., booking management, WhatsApp integration).</p>
+                  <h3 className="text-white font-medium text-lg mt-4">4. Photography & Portfolio</h3>
+                  <p>As a makeup artistry business, we may ask for your consent to use your photos for our portfolio, social media, and marketing materials. You hold the right to decline this request.</p>
+                  <p className="mt-6 text-xs text-gray-500">Last updated: {new Date().toLocaleDateString()}</p>
+                </div>
+              </DialogContent>
+            </Dialog>
+            <Dialog>
+              <DialogTrigger asChild>
+                <button className="hover:text-white transition-colors cursor-pointer">Terms of Service</button>
+              </DialogTrigger>
+              <DialogContent className="max-w-2xl bg-[#0a0a0a] text-gray-300 border-white/10 max-h-[80vh] overflow-y-auto z-[100]">
+                <DialogHeader>
+                  <DialogTitle className="text-2xl font-serif text-primary mb-4">Terms of Service</DialogTitle>
+                </DialogHeader>
+                <div className="space-y-4 text-sm leading-relaxed">
+                  <p>By booking a session or academy course with Puja Glam Makeup Studio, you agree to the following terms and conditions.</p>
+                  <h3 className="text-white font-medium text-lg mt-4">1. Bookings & Payments</h3>
+                  <p>To secure your date, a non-refundable advance payment is required. The remaining balance must be cleared on or before the day of the event. All course fees for the Makeup Academy must be paid as per the agreed schedule.</p>
+                  <h3 className="text-white font-medium text-lg mt-4">2. Cancellations & Rescheduling</h3>
+                  <p>Advance deposits are non-refundable in the event of cancellation by the client. In case of rescheduling due to unforeseen circumstances, we will do our best to accommodate the new date subject to availability, but this is not guaranteed.</p>
+                  <h3 className="text-white font-medium text-lg mt-4">3. Travel & Accommodation</h3>
+                  <p>For bookings outside Gaya, Bihar (including Jharkhand and Delhi NCR), additional travel, lodging, and logistics charges will apply and must be borne by the client unless stated otherwise in a custom quote.</p>
+                  <h3 className="text-white font-medium text-lg mt-4">4. Allergies & Skin Conditions</h3>
+                  <p>It is the client's responsibility to inform us of any skin conditions, allergies, or sensitivities prior to the application of makeup. Puja Glam Makeup Studio will not be held liable for any allergic reactions or skin complications.</p>
+                  <p className="mt-6 text-xs text-gray-500">Last updated: {new Date().toLocaleDateString()}</p>
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </div>

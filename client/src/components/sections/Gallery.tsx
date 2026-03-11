@@ -6,12 +6,12 @@ import { motion, AnimatePresence } from "framer-motion";
 const CATEGORIES = ["All", "Bridal", "Party", "Editorial"];
 
 const images = [
-  { id: 1, src: "/src/assets/images/gallery/bridal_1.jpg", category: "Bridal", height: "h-[400px]" },
-  { id: 2, src: "/src/assets/images/gallery/party_1.jpg", category: "Party", height: "h-[300px]" },
-  { id: 3, src: "/src/assets/images/gallery/bridal_2.jpg", category: "Bridal", height: "h-[500px]" },
-  { id: 4, src: "/src/assets/images/gallery/party_2.jpg", category: "Party", height: "h-[350px]" },
-  { id: 5, src: "/src/assets/images/gallery/bridal_3.jpg", category: "Bridal", height: "h-[450px]" },
-  { id: 6, src: "/src/assets/images/gallery/party_3.jpg", category: "Party", height: "h-[380px]" },
+  { id: 1, src: "/src/assets/images/gallery/bridal_indian_1.jpg", category: "Bridal", height: "h-[400px]" },
+  { id: 2, src: "/src/assets/images/gallery/party_indian_1.jpg", category: "Party", height: "h-[300px]" },
+  { id: 3, src: "/src/assets/images/gallery/bridal_indian_2.jpg", category: "Bridal", height: "h-[500px]" },
+  { id: 4, src: "/src/assets/images/gallery/party_indian_2.jpg", category: "Party", height: "h-[350px]" },
+  { id: 5, src: "/src/assets/images/gallery/bridal_indian_3.jpg", category: "Bridal", height: "h-[450px]" },
+  { id: 6, src: "/src/assets/images/gallery/party_indian_3.jpg", category: "Party", height: "h-[380px]" },
 ];
 
 export default function Gallery() {

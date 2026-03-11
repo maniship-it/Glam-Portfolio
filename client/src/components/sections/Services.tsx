@@ -30,15 +30,15 @@ const services = [
     popular: false
   },
   {
-    title: "Editorial / Photoshoot",
-    price: "Custom Quote",
-    description: "Creative, high-impact looks designed for the harsh lighting of studio photography and creative direction.",
+    title: "Makeup Academy",
+    price: "From ₹15,000 + GST",
+    description: "Learn from a certified professional makeup artist from a reputed academy in Delhi. Perfect for aspiring artists.",
     features: [
-      "Half-day or full-day rates",
-      "Multiple look changes",
-      "On-set touch-ups",
-      "Creative concept collaboration",
-      "Body makeup included"
+      "1 Month & 3 Months Courses",
+      "Hands-on practical training",
+      "Product knowledge & kit building",
+      "Certification upon completion",
+      "Business & client management"
     ],
     popular: false
   }

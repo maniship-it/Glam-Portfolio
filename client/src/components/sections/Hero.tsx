@@ -9,7 +9,7 @@ export default function Hero() {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/src/assets/images/hero.jpg" 
+          src="/src/assets/images/hero-indian.jpg" 
           alt="Luxury Makeup Studio in Gaya Bihar - Puja Glam" 
           className="w-full h-full object-cover object-center opacity-40 scale-105 animate-[pulse_10s_ease-in-out_infinite]"
         />
