@@ -22,6 +22,9 @@ export default function Footer() {
               Premium makeup artistry specializing in luxury bridal, editorial, and event glamour. Serving clients across Bihar, Jharkhand, and Delhi NCR with unparalleled service. Certified from a reputed academy in Delhi.
             </p>
             <div className="flex gap-4">
+              <a href="https://youtube.com/@Pujaglammakeover" aria-label="YouTube" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary transition-colors">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.25 8.001c0-2.316 1.83-4.148 4.148-4.148h11.204c2.316 0 4.148 1.832 4.148 4.148v7.998c0 2.316-1.832 4.148-4.148 4.148H6.398c-2.316 0-4.148-1.832-4.148-4.148V8.001z"/><path d="M9.75 15.525v-7.05l5.55 3.525-5.55 3.525z"/></svg>
+              </a>
               <a href="https://www.instagram.com/puja_glam_makeup_studio" aria-label="Instagram" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary transition-colors">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
               </a>

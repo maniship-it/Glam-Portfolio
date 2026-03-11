@@ -88,6 +88,15 @@ export default function Navbar() {
 
           <div className="hidden md:flex items-center gap-4">
             <a 
+              href="https://youtube.com/@Pujaglammakeover" 
+              target="_blank" 
+              rel="noreferrer"
+              className="text-gray-300 hover:text-primary transition-colors focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md outline-none"
+              aria-label="Subscribe to Puja Glam on YouTube"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.25 8.001c0-2.316 1.83-4.148 4.148-4.148h11.204c2.316 0 4.148 1.832 4.148 4.148v7.998c0 2.316-1.832 4.148-4.148 4.148H6.398c-2.316 0-4.148-1.832-4.148-4.148V8.001z"/><path d="M9.75 15.525v-7.05l5.55 3.525-5.55 3.525z"/></svg>
+            </a>
+            <a 
               href="https://www.instagram.com/puja_glam_makeup_studio" 
               target="_blank" 
               rel="noreferrer"
@@ -120,6 +129,9 @@ export default function Navbar() {
             <a href="#services" onClick={closeMobileMenu} className="text-gray-300 hover:text-primary transition-colors">Services</a>
             <a href="#testimonials" onClick={closeMobileMenu} className="text-gray-300 hover:text-primary transition-colors">Testimonials</a>
             <div className="flex gap-6 mt-4">
+              <a href="https://youtube.com/@Pujaglammakeover" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-primary transition-colors">
+                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.25 8.001c0-2.316 1.83-4.148 4.148-4.148h11.204c2.316 0 4.148 1.832 4.148 4.148v7.998c0 2.316-1.832 4.148-4.148 4.148H6.398c-2.316 0-4.148-1.832-4.148-4.148V8.001z"/><path d="M9.75 15.525v-7.05l5.55 3.525-5.55 3.525z"/></svg>
+              </a>
               <a href="https://www.instagram.com/puja_glam_makeup_studio" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-primary transition-colors">
                 <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
               </a>
