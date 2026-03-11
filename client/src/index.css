@@ -5,7 +5,7 @@
 
 @theme inline {
   --font-sans: 'Inter', sans-serif;
-  --font-serif: 'Playfair Display', serif;
+  --font-serif: 'Montserrat', sans-serif;
   
   --radius-sm: 0.125rem;
   --radius-md: 0.25rem;
@@ -38,41 +38,45 @@
   --animate-slide-up: slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* DARK LUXURY MODE ONLY for this enterprise vibe */
+/* DEEP CHARCOAL, MAROON ACCENT, WARM BEIGE/GOLD */
 :root {
-  --background: 0 0% 3%;
-  --foreground: 0 0% 98%;
+  --background: 0 0% 10%; /* #1a1a1a Deep Charcoal */
+  --foreground: 0 0% 96%; /* #f5f5f5 */
 
-  --card: 0 0% 6%;
-  --card-foreground: 0 0% 98%;
+  --card: 0 0% 12%; 
+  --card-foreground: 0 0% 96%;
 
-  --popover: 0 0% 6%;
-  --popover-foreground: 0 0% 98%;
+  --popover: 0 0% 12%;
+  --popover-foreground: 0 0% 96%;
 
-  /* Champagne/Gold primary */
-  --primary: 43 74% 66%;
-  --primary-foreground: 0 0% 9%;
+  /* Warm Beige / Gold Accent */
+  --primary: 38 41% 75%; /* #d8c3a5 */
+  --primary-foreground: 0 0% 10%;
 
-  --secondary: 0 0% 12%;
+  /* Maroon Accent */
+  --secondary: 348 60% 30%; /* #7b1f32 */
   --secondary-foreground: 0 0% 98%;
 
-  --muted: 0 0% 12%;
-  --muted-foreground: 0 0% 60%;
+  --muted: 0 0% 15%;
+  --muted-foreground: 0 0% 65%;
 
-  --accent: 43 74% 66%;
-  --accent-foreground: 0 0% 9%;
+  --accent: 348 60% 30%; /* Maroon for highlights */
+  --accent-foreground: 0 0% 98%;
 
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 0 0% 15%;
-  --input: 0 0% 15%;
-  --ring: 43 74% 66%;
+  --border: 0 0% 18%;
+  --input: 0 0% 18%;
+  --ring: 38 41% 75%; /* Gold/Beige Ring */
 
   --radius: 0.5rem;
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   * {
     @apply border-border;
   }
@@ -80,13 +84,18 @@
     @apply font-sans antialiased bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif tracking-tight;
+    @apply font-serif tracking-tight font-semibold;
+  }
+  
+  /* Gold-ish focus outline on interactive elements */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background transition-shadow;
   }
 }
 
 @layer utilities {
   .text-glow {
-    text-shadow: 0 0 20px rgba(220, 178, 106, 0.3);
+    text-shadow: 0 0 20px rgba(216, 195, 165, 0.4); /* Glow matching primary */
   }
   .glass-panel {
     @apply bg-white/5 backdrop-blur-md border border-white/10;
@@ -99,5 +108,14 @@
   @keyframes slide-up {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Hide scrollbar for gallery filters */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
