@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BookingModal } from "@/components/BookingModal";
 
 export default function Hero() {
   return (
@@ -53,11 +54,13 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
           className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
         >
-          <Button size="lg" className="text-lg px-8 h-14 bg-primary text-primary-foreground hover:bg-primary/90 rounded-full w-full sm:w-auto shadow-[0_0_30px_rgba(220,178,106,0.3)]">
-            Book Appointment
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Button>
-          <Button size="lg" variant="outline" className="text-lg px-8 h-14 rounded-full border-white/20 hover:bg-white/5 w-full sm:w-auto">
+          <BookingModal>
+            <Button size="lg" className="text-lg px-8 h-14 bg-primary text-primary-foreground hover:bg-primary/90 rounded-full w-full sm:w-auto shadow-[0_0_30px_rgba(220,178,106,0.3)]">
+              Book Appointment
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+          </BookingModal>
+          <Button size="lg" variant="outline" className="text-lg px-8 h-14 rounded-full border-white/20 hover:bg-white/5 w-full sm:w-auto" onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}>
             View Portfolio
           </Button>
         </motion.div>

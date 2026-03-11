@@ -1,10 +1,11 @@
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BookingModal } from "@/components/BookingModal";
 
 const services = [
   {
     title: "Bridal Elegance",
-    price: "From $350",
+    price: "From ₹25,000",
     description: "Flawless, long-lasting makeup designed specifically for high-definition photography and emotional tears.",
     features: [
       "Extensive pre-wedding consultation",
@@ -17,7 +18,7 @@ const services = [
   },
   {
     title: "Event Glamour",
-    price: "From $150",
+    price: "From ₹10,000",
     description: "Stand out at your next gala, party or corporate event with a look customized to your outfit and personal style.",
     features: [
       "Skin preparation",
@@ -61,7 +62,7 @@ export default function Services() {
           {services.map((service, index) => (
             <div 
               key={index}
-              className={`relative p-8 rounded-2xl glass-panel transition-all duration-300 hover:-translate-y-2 ${
+              className={`relative p-8 rounded-2xl glass-panel transition-all duration-300 hover:-translate-y-2 flex flex-col ${
                 service.popular ? 'border-primary/50 shadow-[0_0_30px_rgba(220,178,106,0.15)]' : ''
               }`}
             >
@@ -77,7 +78,7 @@ export default function Services() {
                 {service.description}
               </p>
 
-              <ul className="space-y-4 mb-8">
+              <ul className="space-y-4 mb-8 flex-1">
                 {service.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start text-sm text-gray-300">
                     <Check className="w-5 h-5 text-primary mr-3 shrink-0" />
@@ -86,12 +87,14 @@ export default function Services() {
                 ))}
               </ul>
 
-              <Button 
-                className={`w-full ${service.popular ? 'bg-primary text-primary-foreground hover:bg-primary/90' : 'bg-white/10 hover:bg-white/20 text-white'}`}
-                variant={service.popular ? "default" : "secondary"}
-              >
-                Book Now
-              </Button>
+              <BookingModal defaultService={service.title}>
+                <Button 
+                  className={`w-full mt-auto ${service.popular ? 'bg-primary text-primary-foreground hover:bg-primary/90' : 'bg-white/10 hover:bg-white/20 text-white'}`}
+                  variant={service.popular ? "default" : "secondary"}
+                >
+                  Book Now
+                </Button>
+              </BookingModal>
             </div>
           ))}
         </div>

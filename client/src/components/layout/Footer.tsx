@@ -6,9 +6,10 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-serif font-bold text-xl">
-                P
+            <div className="flex items-center gap-2 mb-6 group">
+              <div className="w-11 h-11 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-serif font-bold text-xl group-hover:shadow-[0_0_15px_rgba(220,178,106,0.5)] transition-all">
+                <span>P</span>
+                <span className="italic font-light -ml-0.5">G</span>
               </div>
               <div className="font-serif text-2xl tracking-tight">
                 <span className="text-white">Puja</span>
@@ -30,7 +31,7 @@ export default function Footer() {
             <ul className="space-y-3 text-muted-foreground">
               <li><a href="#portfolio" className="hover:text-primary transition-colors">Portfolio</a></li>
               <li><a href="#services" className="hover:text-primary transition-colors">Services & Pricing</a></li>
-              <li><a href="#about" className="hover:text-primary transition-colors">About the Artist</a></li>
+              <li><a href="#testimonials" className="hover:text-primary transition-colors">Testimonials</a></li>
               <li><a href="#" className="hover:text-primary transition-colors">FAQ</a></li>
             </ul>
           </div>

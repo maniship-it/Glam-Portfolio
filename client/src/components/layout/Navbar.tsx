@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { BookingModal } from "@/components/BookingModal";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -22,8 +23,9 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-4 md:px-8 flex items-center justify-between">
         <a href="#" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-serif font-bold text-xl group-hover:shadow-[0_0_15px_rgba(220,178,106,0.5)] transition-all">
-            P
+          <div className="w-11 h-11 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-serif font-bold text-xl group-hover:shadow-[0_0_15px_rgba(220,178,106,0.5)] transition-all">
+            <span>P</span>
+            <span className="italic font-light -ml-0.5">G</span>
           </div>
           <div className="font-serif text-xl tracking-tight hidden sm:block">
             <span className="text-white">Puja</span>
@@ -34,7 +36,6 @@ export default function Navbar() {
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
           <a href="#portfolio" className="hover:text-primary transition-colors">Portfolio</a>
           <a href="#services" className="hover:text-primary transition-colors">Services</a>
-          <a href="#about" className="hover:text-primary transition-colors">The Artist</a>
           <a href="#testimonials" className="hover:text-primary transition-colors">Testimonials</a>
         </nav>
 
@@ -48,9 +49,11 @@ export default function Navbar() {
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
           </a>
-          <Button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 shadow-[0_0_15px_rgba(220,178,106,0.2)]">
-            Book Session
-          </Button>
+          <BookingModal>
+            <Button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 shadow-[0_0_15px_rgba(220,178,106,0.2)]">
+              Book Session
+            </Button>
+          </BookingModal>
         </div>
       </div>
     </header>
