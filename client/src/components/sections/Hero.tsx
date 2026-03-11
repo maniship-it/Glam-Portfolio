@@ -60,7 +60,7 @@ export default function Hero() {
             </BookingModal>
             
             <a 
-              href="https://wa.me/918210071659" 
+              href="https://wa.me/918210071659?text=Hi%20Puja%20Glam%20Makeup%20Studio!%20I%20would%20like%20to%20know%20more%20about%20your%20makeup%20services." 
               target="_blank" 
               rel="noreferrer"
               className="inline-flex items-center justify-center gap-2 h-14 px-8 rounded-full border border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all duration-300 w-full sm:w-auto text-lg hover:-translate-y-1"
