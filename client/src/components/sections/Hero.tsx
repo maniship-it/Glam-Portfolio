@@ -72,7 +72,7 @@ export default function Hero() {
         </div>
 
         {/* Badge aligned right */}
-        <div className="lg:col-span-4 flex justify-start lg:justify-end">
+        <div className="lg:col-span-4 flex justify-center lg:justify-end mt-12 lg:mt-0 w-full">
           <motion.div 
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -80,7 +80,7 @@ export default function Hero() {
             className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl border border-primary/30 bg-primary/10 text-primary backdrop-blur-md shadow-[0_0_20px_rgba(216,195,165,0.15)]"
           >
             <Sparkles className="w-6 h-6 animate-pulse" />
-            <span className="text-base font-medium tracking-wide uppercase leading-tight">
+            <span className="text-base font-medium tracking-wide uppercase leading-tight text-center md:text-left">
               Luxury Bridal<br/>& Evening Glam
             </span>
           </motion.div>

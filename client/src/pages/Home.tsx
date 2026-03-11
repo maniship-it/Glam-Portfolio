@@ -7,10 +7,12 @@ import Testimonials from "@/components/sections/Testimonials";
 import InstagramFeed from "@/components/sections/InstagramFeed";
 import Footer from "@/components/layout/Footer";
 import FloatingChatbot from "@/components/FloatingChatbot";
+import GlitterEffect from "@/components/GlitterEffect";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background text-foreground selection:bg-primary/30 selection:text-white">
+    <main className="min-h-screen bg-background text-foreground selection:bg-primary/30 selection:text-white custom-cursor">
+      <GlitterEffect />
       <Navbar />
       <Hero />
       

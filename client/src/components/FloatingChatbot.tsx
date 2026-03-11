@@ -48,7 +48,7 @@ export default function FloatingChatbot() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[100]">
+    <div className="fixed bottom-24 md:bottom-6 right-6 z-[100]">
       {/* Chat Button */}
       <button 
         onClick={() => setIsOpen(!isOpen)}
