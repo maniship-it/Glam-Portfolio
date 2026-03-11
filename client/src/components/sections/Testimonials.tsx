@@ -56,16 +56,6 @@ export default function Testimonials() {
   return (
     <section className="py-24 bg-background relative border-t border-white/5">
       <div className="container mx-auto px-4">
-        
-        {/* Logos Section */}
-        <div className="mb-24 text-center">
-          <p className="text-sm text-muted-foreground uppercase tracking-[0.2em] mb-8 font-semibold">Featured In & Trusted By</p>
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-            {logos.map((logo, i) => (
-              <img key={i} src={logo.url} alt={`${logo.name} logo`} className="h-6 md:h-8 object-contain" />
-            ))}
-          </div>
-        </div>
 
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-serif text-white mb-4">Words of <span className="text-primary italic">Praise</span></h2>

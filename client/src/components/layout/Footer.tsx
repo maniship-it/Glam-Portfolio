@@ -65,7 +65,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Puja Glam Makeup Studio. Best Makeup Artist in Gaya, Bihar.</p>
+          <p>&copy; {new Date().getFullYear()} <span className="text-white">Puja</span> <span className="text-primary italic">Glam</span> Makeup Studio. Best Makeup Artist in Gaya, Bihar.</p>
           <div className="flex gap-4">
             <Dialog>
               <DialogTrigger asChild>
@@ -76,7 +76,7 @@ export default function Footer() {
                   <DialogTitle className="text-2xl font-serif text-primary mb-4">Privacy Policy</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-4 text-sm leading-relaxed">
-                  <p>Welcome to Puja Glam Makeup Studio. We are committed to protecting your privacy and ensuring the security of your personal information.</p>
+                  <p>Welcome to <span className="text-white">Puja</span> <span className="text-primary italic">Glam</span> Makeup Studio. We are committed to protecting your privacy and ensuring the security of your personal information.</p>
                   <h3 className="text-white font-medium text-lg mt-4">1. Information We Collect</h3>
                   <p>We may collect personal information such as your name, contact details (phone number, email address), event date, and location when you book our services, use our website, or interact with our chatbot. Any images shared for reference or taken during sessions (with your consent) will be handled with strict confidentiality.</p>
                   <h3 className="text-white font-medium text-lg mt-4">2. Use of Information</h3>
@@ -98,7 +98,7 @@ export default function Footer() {
                   <DialogTitle className="text-2xl font-serif text-primary mb-4">Terms of Service</DialogTitle>
                 </DialogHeader>
                 <div className="space-y-4 text-sm leading-relaxed">
-                  <p>By booking a session or academy course with Puja Glam Makeup Studio, you agree to the following terms and conditions.</p>
+                  <p>By booking a session or academy course with <span className="text-white">Puja</span> <span className="text-primary italic">Glam</span> Makeup Studio, you agree to the following terms and conditions.</p>
                   <h3 className="text-white font-medium text-lg mt-4">1. Bookings & Payments</h3>
                   <p>To secure your date, a non-refundable advance payment is required. The remaining balance must be cleared on or before the day of the event. All course fees for the Makeup Academy must be paid as per the agreed schedule.</p>
                   <h3 className="text-white font-medium text-lg mt-4">2. Cancellations & Rescheduling</h3>
@@ -106,7 +106,7 @@ export default function Footer() {
                   <h3 className="text-white font-medium text-lg mt-4">3. Travel & Accommodation</h3>
                   <p>For bookings outside Gaya, Bihar (including Jharkhand and Delhi NCR), additional travel, lodging, and logistics charges will apply and must be borne by the client unless stated otherwise in a custom quote.</p>
                   <h3 className="text-white font-medium text-lg mt-4">4. Allergies & Skin Conditions</h3>
-                  <p>It is the client's responsibility to inform us of any skin conditions, allergies, or sensitivities prior to the application of makeup. Puja Glam Makeup Studio will not be held liable for any allergic reactions or skin complications.</p>
+                  <p>It is the client's responsibility to inform us of any skin conditions, allergies, or sensitivities prior to the application of makeup. <span className="text-white">Puja</span> <span className="text-primary italic">Glam</span> Makeup Studio will not be held liable for any allergic reactions or skin complications.</p>
                   <p className="mt-6 text-xs text-gray-500">Last updated: {new Date().toLocaleDateString()}</p>
                 </div>
               </DialogContent>

@@ -5,8 +5,8 @@ import { Input } from "@/components/ui/input";
 
 export default function FloatingChatbot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    { id: 1, text: "Hi there! Welcome to Puja Glam Makeup Studio. How can I help you today?", isBot: true }
+  const [messages, setMessages] = useState<Array<{id: number, text: React.ReactNode, isBot: boolean}>>([
+    { id: 1, text: <>Hi there! Welcome to <span className="text-white">Puja</span> <span className="text-primary italic">Glam</span> Makeup Studio. How can I help you today?</>, isBot: true }
   ]);
   const [inputText, setInputText] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -68,10 +68,12 @@ export default function FloatingChatbot() {
         <div className="bg-primary/10 border-b border-white/10 p-4 flex justify-between items-center backdrop-blur-md">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-serif font-bold text-sm">
-              PG
+              <span className="tracking-tight">P</span><span className="italic font-light -ml-0.5">G</span>
             </div>
             <div>
-              <h3 className="font-serif text-white font-medium">Puja Glam Assistant</h3>
+              <h3 className="font-serif font-medium tracking-tight text-white">
+                Puja <span className="text-primary italic">Glam</span> Assistant
+              </h3>
               <p className="text-xs text-primary">AI Support</p>
             </div>
           </div>

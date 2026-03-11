@@ -14,12 +14,12 @@ export default function Hero() {
           loop 
           muted 
           playsInline
-          className="w-full h-full object-cover object-center opacity-50 scale-105"
+          className="w-full h-full object-cover object-center opacity-80 scale-105"
         >
           <source src="/src/assets/videos/hero-loop.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/40 to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.5)_100%)]" />
       </div>
 
       <div className="container relative z-10 px-4 mx-auto grid lg:grid-cols-12 gap-8 items-center">
@@ -29,10 +29,11 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-6 leading-tight"
+            className="text-5xl md:text-7xl lg:text-8xl font-serif mb-6 leading-tight"
           >
-            Puja Glam <br/>
-            <span className="text-primary italic text-glow">Makeup Studio</span>
+            <span className="text-white tracking-tight">Puja</span>
+            <span className="text-primary italic tracking-tight">Glam</span> <br/>
+            <span className="text-white text-glow font-light">Makeup Studio</span>
           </motion.h2>
 
           <motion.h3 
