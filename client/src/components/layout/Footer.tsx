@@ -13,7 +13,7 @@ export default function Footer() {
                 <span>P</span>
                 <span className="italic font-light -ml-0.5">G</span>
               </div>
-              <div className="font-serif text-2xl tracking-tight">
+              <div className="font-serif text-2xl tracking-tight hidden sm:block">
                 <span className="text-white">Puja</span>
                 <span className="text-primary italic">Glam</span>
               </div>

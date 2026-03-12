@@ -130,7 +130,7 @@
 
   @media (pointer: fine) {
     .custom-cursor, .custom-cursor * {
-      cursor: url('/makeup-brush.png') 0 32, auto !important;
+      cursor: url('/makeup-brush-small.png') 0 16, auto !important;
     }
   }
 }

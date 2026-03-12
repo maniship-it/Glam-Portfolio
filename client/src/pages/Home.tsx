@@ -8,6 +8,7 @@ import InstagramFeed from "@/components/sections/InstagramFeed";
 import Footer from "@/components/layout/Footer";
 import FloatingChatbot from "@/components/FloatingChatbot";
 import GlitterEffect from "@/components/GlitterEffect";
+import BackgroundVectors from "@/components/BackgroundVectors";
 import { Button } from "@/components/ui/button";
 import { BookingModal } from "@/components/BookingModal";
 import { Sparkles } from "lucide-react";
@@ -15,10 +16,14 @@ import { Sparkles } from "lucide-react";
 export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/30 selection:text-white custom-cursor">
+      <BackgroundVectors />
       <GlitterEffect />
       <Navbar />
       <Hero />
       
+      {/* Very thin creative separator */}
+      <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent shadow-[0_0_10px_rgba(216,195,165,0.8)] relative z-20"></div>
+
       {/* Offer Banner */}
       <section className="py-6 bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20 border-y border-primary/30 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 mix-blend-overlay bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.8)_0%,transparent_100%)]"></div>
@@ -34,7 +39,7 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-4 w-full md:w-auto">
             <BookingModal defaultService="Winter Bridal Offer 20% OFF">
-              <Button size="lg" className="w-full md:w-auto bg-white text-black hover:bg-gray-200 rounded-full font-bold px-8 shadow-[0_0_20px_rgba(255,255,255,0.5)] animate-pulse transition-all hover:scale-105">
+              <Button size="lg" className="w-full md:w-auto bg-[#FFD700] text-black hover:bg-[#FFC000] rounded-full font-bold px-8 shadow-[0_0_25px_rgba(255,215,0,0.8)] animate-pulse transition-all hover:scale-105">
                 Hurry Now - Claim Offer
               </Button>
             </BookingModal>

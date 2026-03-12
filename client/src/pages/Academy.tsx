@@ -1,9 +1,10 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import GlitterEffect from "@/components/GlitterEffect";
+import BackgroundVectors from "@/components/BackgroundVectors";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { BookingModal } from "@/components/BookingModal";
+import { AcademyModal } from "@/components/AcademyModal";
 import { Star, CheckCircle, ArrowRight, Sparkles } from "lucide-react";
 import { useEffect } from "react";
 
@@ -14,6 +15,7 @@ export default function Academy() {
 
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary/30 selection:text-white custom-cursor">
+      <BackgroundVectors />
       <GlitterEffect />
       <Navbar />
       
@@ -37,7 +39,7 @@ export default function Academy() {
             transition={{ duration: 0.8 }}
           >
             <div className="inline-block px-4 py-1.5 rounded-full border border-silver/30 bg-[#C0C0C0]/10 text-[#C0C0C0] backdrop-blur-md mb-6 font-medium tracking-wider text-sm shadow-[0_0_15px_rgba(192,192,192,0.2)]">
-              PUJA GLAM ACADEMY
+              <span className="text-white font-serif tracking-tight">Puja</span> <span className="text-primary italic font-serif tracking-tight">Glam</span> ACADEMY
             </div>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif mb-6 leading-tight">
               Master the Art of <br />
@@ -50,12 +52,12 @@ export default function Academy() {
               — Puja, Lead Artist & Educator
             </p>
             
-            <BookingModal defaultService="Academy Training Inquiry">
+            <AcademyModal defaultCourse="Academy Training Inquiry">
               <Button size="lg" className="bg-[#C0C0C0] text-black hover:bg-white rounded-full px-8 h-14 text-lg shadow-[0_0_20px_rgba(192,192,192,0.4)] transition-all hover:scale-105">
                 Enroll Now
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
-            </BookingModal>
+            </AcademyModal>
           </motion.div>
         </div>
       </section>
@@ -98,11 +100,11 @@ export default function Academy() {
                 ))}
               </ul>
               
-              <BookingModal defaultService="Pro Bridal Masterclass">
+              <AcademyModal defaultCourse="Pro Bridal Masterclass">
                 <Button className="w-full bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-full">
                   Request Syllabus
                 </Button>
-              </BookingModal>
+              </AcademyModal>
             </motion.div>
 
             {/* Self Makeup Course */}
@@ -138,11 +140,11 @@ export default function Academy() {
                 ))}
               </ul>
 
-              <BookingModal defaultService="Self Grooming Course">
+              <AcademyModal defaultCourse="Self Grooming Course">
                 <Button className="w-full bg-[#C0C0C0] text-black hover:bg-white rounded-full shadow-[0_0_15px_rgba(192,192,192,0.3)]">
                   Book Your Seat
                 </Button>
-              </BookingModal>
+              </AcademyModal>
             </motion.div>
           </div>
         </div>

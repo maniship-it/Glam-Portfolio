@@ -103,15 +103,15 @@ export default function FloatingChatbot() {
         </div>
 
         {/* Input Area */}
-        <form onSubmit={handleSend} className="p-3 bg-background border-t border-white/10 flex gap-2">
+        <form onSubmit={handleSend} className="p-3 border-t border-white/10 bg-[#0a0a0a] flex gap-2">
           <Input 
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
-            placeholder="Ask about services, pricing..." 
-            className="border-white/10 bg-white/5 text-white focus-visible:ring-primary h-10 rounded-full px-4"
+            placeholder="Ask Aditi anything..." 
+            className="flex-1 bg-white/5 border-white/10 text-white focus-visible:ring-primary rounded-full px-4"
           />
-          <Button type="submit" size="icon" className="h-10 w-10 rounded-full bg-primary hover:bg-primary/90 shrink-0">
-            <Send className="w-4 h-4 text-primary-foreground" />
+          <Button type="submit" size="icon" className="rounded-full bg-primary hover:bg-primary/90 shrink-0 h-10 w-10" disabled={!inputText.trim() || isTyping}>
+            <Send className="w-4 h-4" />
           </Button>
         </form>
       </div>

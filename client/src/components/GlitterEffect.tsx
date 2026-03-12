@@ -6,13 +6,40 @@ interface Sparkle {
   y: number;
   color: string;
   size: number;
+  vx: number;
+  vy: number;
 }
 
 export default function GlitterEffect() {
   const [sparkles, setSparkles] = useState<Sparkle[]>([]);
 
   useEffect(() => {
+    let animationFrameId: number;
+
+    const animate = () => {
+      setSparkles((prev) => 
+        prev.map(s => ({
+          ...s,
+          x: s.x + s.vx,
+          y: s.y + s.vy,
+          vy: s.vy + 0.15, // gravity
+        })).filter(s => s.y < window.innerHeight + 100)
+      );
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, []);
+
+  useEffect(() => {
     const handlePointerDown = (e: MouseEvent | TouchEvent) => {
+      const target = e.target as HTMLElement;
+      // Do not trigger on inputs, textareas, buttons, or links to avoid interference
+      if (['INPUT', 'TEXTAREA', 'BUTTON', 'A'].includes(target.tagName) || target.closest('button') || target.closest('a')) {
+        return;
+      }
+
       let clientX, clientY;
       if ('touches' in e) {
         clientX = e.touches[0].clientX;
@@ -23,24 +50,26 @@ export default function GlitterEffect() {
       }
 
       const newSparkles: Sparkle[] = [];
-      const colors = ['#d8c3a5', '#ffd700', '#e6e6fa', '#ffffff', '#ffdf00', '#c0c0c0']; // Gold, silver, beige
+      const colors = ['#d8c3a5', '#ffd700', '#e6e6fa', '#ffffff', '#ffdf00', '#c0c0c0'];
       
-      for (let i = 0; i < 15; i++) {
+      for (let i = 0; i < 20; i++) {
         newSparkles.push({
           id: Date.now() + i,
-          x: clientX + (Math.random() - 0.5) * 80,
-          y: clientY + (Math.random() - 0.5) * 80,
+          x: clientX,
+          y: clientY,
           color: colors[Math.floor(Math.random() * colors.length)],
-          size: Math.random() * 6 + 2,
+          size: Math.random() * 3 + 1, // smaller particles
+          vx: (Math.random() - 0.5) * 8, // horizontal spread
+          vy: (Math.random() - 1) * 8, // initial upward burst
         });
       }
 
       setSparkles(prev => [...prev, ...newSparkles]);
-
-      // Remove after animation
+      
+      // Remove after 3 seconds (they usually fall off screen by then)
       setTimeout(() => {
         setSparkles(prev => prev.filter(s => !newSparkles.find(ns => ns.id === s.id)));
-      }, 1000);
+      }, 3000);
     };
 
     window.addEventListener('mousedown', handlePointerDown);
@@ -57,14 +86,14 @@ export default function GlitterEffect() {
       {sparkles.map(s => (
         <div
           key={s.id}
-          className="absolute rounded-full animate-sparkle mix-blend-screen"
+          className="absolute rounded-full mix-blend-screen opacity-80"
           style={{
             left: s.x,
             top: s.y,
             width: s.size,
             height: s.size,
             backgroundColor: s.color,
-            boxShadow: `0 0 ${s.size * 2}px ${s.color}`,
+            boxShadow: `0 0 ${s.size}px ${s.color}`,
           }}
         />
       ))}
