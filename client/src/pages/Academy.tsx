@@ -25,8 +25,10 @@ export default function Academy() {
           <img 
             src="/src/assets/images/academy-hero.jpg" 
             alt="Puja Glam Makeup Academy Training" 
-            className="w-full h-full object-cover object-center opacity-40"
+            className="w-full h-full object-cover object-center opacity-25"
             style={{ objectPosition: "center 20%" }}
+            loading="eager"
+            decoding="async"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/50 to-transparent" />

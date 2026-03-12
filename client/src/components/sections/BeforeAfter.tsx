@@ -85,6 +85,7 @@ export default function BeforeAfter({ beforeImage, afterImage, title = "The Tran
           className="absolute inset-0 w-full h-full object-cover"
           draggable="false"
           loading="lazy"
+          decoding="async"
         />
         <div className="absolute top-4 right-4 bg-background/80 backdrop-blur px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest border border-white/10 text-primary shadow-lg pointer-events-none">
           Glam
@@ -102,6 +103,7 @@ export default function BeforeAfter({ beforeImage, afterImage, title = "The Tran
             style={{ width: '100vw', maxWidth: containerRef.current?.offsetWidth || '100%' }}
             draggable="false"
             loading="lazy"
+            decoding="async"
           />
           <div className="absolute top-4 left-4 bg-background/80 backdrop-blur px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest border border-white/10 text-white shadow-lg pointer-events-none">
             Natural

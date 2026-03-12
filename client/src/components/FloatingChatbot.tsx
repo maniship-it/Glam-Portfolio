@@ -10,6 +10,8 @@ type Message = {
   type?: 'system' | 'message';
 };
 
+const MAKEUP_KEYWORDS = ['makeup', 'bridal', 'party', 'wedding', 'event', 'glam', 'course', 'academy', 'learn', 'teach', 'price', 'cost', 'charge', 'location', 'address', 'where', 'book', 'appointment', 'timing', 'hours', 'open', 'hi', 'hello', 'hey', 'ok', 'okay', 'yes', 'no', 'thanks', 'thank you', 'good', 'great', 'awesome'];
+
 export default function FloatingChatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
@@ -40,28 +42,47 @@ export default function FloatingChatbot() {
     setInputText("");
     setIsTyping(true);
 
-    // Simulate AI typing delay based on message length
+    // Simulate Advanced AI Agent
     setTimeout(() => {
-      let responseText = "I'd love to help you with that! For the most accurate details or to book a session, you can reach Puja directly via WhatsApp at +91 82100 71659. Is there anything specific about our bridal or party makeup you'd like to know?";
+      let responseText = "I can help you with anything related to our makeup services, bridal packages, or academy courses! Just ask me about our pricing, location, or how to book an appointment.";
       const lowerInput = userMessage.toLowerCase();
       
-      if (lowerInput.includes("price") || lowerInput.includes("cost") || lowerInput.includes("how much") || lowerInput.includes("charges")) {
-        responseText = "Our Bridal Elegance package starts at ₹25,000, and our Event Glamour package starts at ₹10,000. We also offer a Professional Bridal Masterclass at our Academy for ₹15,000! Would you like me to guide you to the booking page?";
-      } else if (lowerInput.includes("location") || lowerInput.includes("address") || lowerInput.includes("where")) {
-        responseText = "You can find us at MIG - 61, Shaheed Bhagat Singh Colony, Gango Bigha, Gaya, Bihar - 823001. We're also happy to travel for destination weddings across Jharkhand and Delhi NCR!";
-      } else if (lowerInput.includes("book") || lowerInput.includes("appointment") || lowerInput.includes("hire")) {
-        responseText = "Yay! You can secure your date by clicking the 'Book Session' button at the top of the page, which will connect you instantly to our WhatsApp. We can't wait to glam you up!";
-      } else if (lowerInput.includes("timing") || lowerInput.includes("hours") || lowerInput.includes("open")) {
+      // Basic NLP matching
+      const words = lowerInput.replace(/[^\w\s]/gi, '').split(' ');
+      const hasRelevantKeywords = words.some(word => MAKEUP_KEYWORDS.includes(word)) || 
+                                  MAKEUP_KEYWORDS.some(kw => lowerInput.includes(kw));
+
+      if (!hasRelevantKeywords && words.length > 0) {
+         responseText = "I'm a virtual makeup assistant and I can only help with questions related to Puja Glam Makeup Studio, our services, pricing, academy courses, and bookings. Please ask me something about our studio!";
+      } else if (lowerInput === "ok" || lowerInput === "okay" || lowerInput === "yes" || lowerInput === "yep") {
+         responseText = "Great! Let me know if you need any more details or if you'd like to book a session. You can click 'Book Session' at the top anytime!";
+      } else if (lowerInput === "no" || lowerInput === "nope") {
+         responseText = "No problem! Feel free to browse our portfolio and services. I'll be here if you change your mind or have any questions.";
+      } else if (lowerInput.includes("thank") || lowerInput.includes("thx")) {
+         responseText = "You're very welcome! We hope to see you at Puja Glam Studio soon. Have a glamorous day!";
+      } else if (lowerInput.includes("price") || lowerInput.includes("cost") || lowerInput.includes("how much") || lowerInput.includes("charges") || lowerInput.includes("fee")) {
+        responseText = "Our Bridal Elegance package starts at ₹25,000, and our Event Glamour package starts at ₹10,000. We also offer a Professional Bridal Masterclass at our Academy for ₹15,000 and Self-Grooming for ₹5,000! Would you like to book?";
+      } else if (lowerInput.includes("location") || lowerInput.includes("address") || lowerInput.includes("where") || lowerInput.includes("city")) {
+        responseText = "You can find us at MIG - 61, Shaheed Bhagat Singh Colony, Gango Bigha, Gaya, Bihar - 823001. We also travel for destination weddings across Bihar, Jharkhand, and Delhi NCR!";
+      } else if (lowerInput.includes("book") || lowerInput.includes("appointment") || lowerInput.includes("hire") || lowerInput.includes("contact")) {
+        responseText = "Yay! You can secure your date by clicking the 'Book Session' button at the top of the page, or you can directly WhatsApp Puja at +91 82100 71659. We can't wait to glam you up!";
+      } else if (lowerInput.includes("timing") || lowerInput.includes("hours") || lowerInput.includes("open") || lowerInput.includes("close")) {
         responseText = "Our studio doors are open Monday to Sunday, from 9:00 AM to 6:00 PM. We do accommodate early morning bridal bookings upon request!";
-      } else if (lowerInput.includes("hi") || lowerInput.includes("hello") || lowerInput.includes("hey")) {
-        responseText = "Hello gorgeous! How can I assist you today? Looking for bridal makeup, party glam, or maybe interested in our makeup academy?";
-      } else if (lowerInput.includes("academy") || lowerInput.includes("course") || lowerInput.includes("learn") || lowerInput.includes("teach")) {
+      } else if (lowerInput === "hi" || lowerInput === "hello" || lowerInput === "hey" || lowerInput.includes("hi ") || lowerInput.includes("hello ")) {
+        responseText = "Hello gorgeous! How can I assist you today? Looking for bridal makeup, party glam, or maybe interested in joining our makeup academy?";
+      } else if (lowerInput.includes("academy") || lowerInput.includes("course") || lowerInput.includes("learn") || lowerInput.includes("teach") || lowerInput.includes("class")) {
         responseText = "Our Academy offers incredible courses! We have a Professional Bridal Masterclass (₹15,000) and a Self-Grooming Intensive (₹5,000). You can check out the 'Academy' tab in the menu for the full syllabus!";
+      } else if (lowerInput.includes("services") || lowerInput.includes("offer") || lowerInput.includes("do you")) {
+        responseText = "We offer Luxury Bridal Makeup, Airbrush Makeup, Event & Party Glamour, and Editorial/Fashion Makeup. We also have an Academy for aspiring makeup artists!";
+      } else if (lowerInput.includes("portfolio") || lowerInput.includes("work") || lowerInput.includes("pictures") || lowerInput.includes("photos")) {
+        responseText = "You can view our stunning transformations in the 'Portfolio' section on this page, or check out our Instagram feed at the bottom. We specialize in both traditional Indian bridal and modern soft glam!";
+      } else if (lowerInput.includes("puja") || lowerInput.includes("owner") || lowerInput.includes("artist")) {
+        responseText = "Puja is our Lead Artist and Educator. She is known as the best makeup artist in Gaya, specializing in flawless airbrush and traditional bridal transformations!";
       }
 
       setMessages(prev => [...prev, { id: Date.now(), text: responseText, isBot: true }]);
       setIsTyping(false);
-    }, 1500 + Math.random() * 1000);
+    }, 1000 + Math.random() * 1000);
   };
 
   return (
@@ -99,7 +120,7 @@ export default function FloatingChatbot() {
               </p>
             </div>
           </div>
-          <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white transition-colors">
+          <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white transition-colors" aria-label="Close chat">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -150,7 +171,7 @@ export default function FloatingChatbot() {
             placeholder="Ask Aditi anything..." 
             className="flex-1 bg-white/5 border-white/10 text-white focus-visible:ring-primary rounded-full px-4"
           />
-          <Button type="submit" size="icon" className="rounded-full bg-primary hover:bg-primary/90 shrink-0 h-10 w-10" disabled={!inputText.trim() || isTyping}>
+          <Button type="submit" size="icon" className="rounded-full bg-primary hover:bg-primary/90 shrink-0 h-10 w-10" disabled={!inputText.trim() || isTyping} aria-label="Send message">
             <Send className="w-4 h-4" />
           </Button>
         </form>

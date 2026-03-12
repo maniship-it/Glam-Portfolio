@@ -10,7 +10,7 @@ export default function BackgroundVectors() {
   if (!mounted) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden opacity-[0.03]">
+    <div className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden opacity-[0.1]">
       {/* Lipstick */}
       <svg className="absolute top-[10%] left-[5%] w-24 h-24 rotate-45" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
         <path d="M7 11V19C7 20.1046 7.89543 21 9 21H15C16.1046 21 17 20.1046 17 19V11" />

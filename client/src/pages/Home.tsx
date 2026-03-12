@@ -1,17 +1,41 @@
+import { lazy, Suspense } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/sections/Hero";
-import Gallery from "@/components/sections/Gallery";
 import BeforeAfter from "@/components/sections/BeforeAfter";
 import Services from "@/components/sections/Services";
 import Testimonials from "@/components/sections/Testimonials";
-import InstagramFeed from "@/components/sections/InstagramFeed";
 import Footer from "@/components/layout/Footer";
-import FloatingChatbot from "@/components/FloatingChatbot";
 import GlitterEffect from "@/components/GlitterEffect";
 import BackgroundVectors from "@/components/BackgroundVectors";
 import { Button } from "@/components/ui/button";
 import { BookingModal } from "@/components/BookingModal";
 import { Sparkles } from "lucide-react";
+import { useInView } from "react-intersection-observer";
+
+// Lazy load components that are not immediately visible
+const Gallery = lazy(() => import("@/components/sections/Gallery"));
+const InstagramFeed = lazy(() => import("@/components/sections/InstagramFeed"));
+const FloatingChatbot = lazy(() => import("@/components/FloatingChatbot"));
+
+// Wrapper for lazy hydrating components based on intersection observer
+function LazyHydrate({ children }: { children: React.ReactNode }) {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    rootMargin: '200px 0px', // Start loading 200px before it comes into view
+  });
+
+  return (
+    <div ref={ref}>
+      {inView ? (
+        <Suspense fallback={<div className="h-[600px] w-full flex items-center justify-center"><div className="w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin"></div></div>}>
+          {children}
+        </Suspense>
+      ) : (
+        <div className="h-[600px] w-full" /> // Placeholder to prevent layout shift
+      )}
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -48,7 +72,9 @@ export default function Home() {
       </section>
       
       <div id="portfolio">
-        <Gallery />
+        <LazyHydrate>
+          <Gallery />
+        </LazyHydrate>
       </div>
       
       <section className="py-24 bg-background border-t border-white/5 relative overflow-hidden">
@@ -73,9 +99,15 @@ export default function Home() {
         <Testimonials />
       </div>
       
-      <InstagramFeed />
+      <LazyHydrate>
+        <InstagramFeed />
+      </LazyHydrate>
+      
       <Footer />
-      <FloatingChatbot />
+      
+      <Suspense fallback={null}>
+        <FloatingChatbot />
+      </Suspense>
     </main>
   );
 }

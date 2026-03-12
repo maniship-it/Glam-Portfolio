@@ -33,6 +33,7 @@ export default function InstagramFeed() {
                 alt="Instagram post" 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <div className="flex gap-6 text-white font-medium">

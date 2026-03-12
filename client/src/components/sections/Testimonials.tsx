@@ -26,13 +26,6 @@ const testimonials = [
   }
 ];
 
-const logos = [
-  { name: "Vogue", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Vogue_logo.svg/2560px-Vogue_logo.svg.png" },
-  { name: "Harper's Bazaar", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Harpers_Bazaar_logo.svg/2560px-Harpers_Bazaar_logo.svg.png" },
-  { name: "Elle", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Elle_magazine_logo.svg/2560px-Elle_magazine_logo.svg.png" },
-  { name: "Cosmopolitan", url: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Cosmopolitan_logo.svg/2560px-Cosmopolitan_logo.svg.png" },
-];
-
 export default function Testimonials() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
 
