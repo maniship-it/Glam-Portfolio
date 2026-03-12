@@ -8,6 +8,9 @@ import InstagramFeed from "@/components/sections/InstagramFeed";
 import Footer from "@/components/layout/Footer";
 import FloatingChatbot from "@/components/FloatingChatbot";
 import GlitterEffect from "@/components/GlitterEffect";
+import { Button } from "@/components/ui/button";
+import { BookingModal } from "@/components/BookingModal";
+import { Sparkles } from "lucide-react";
 
 export default function Home() {
   return (
@@ -15,6 +18,29 @@ export default function Home() {
       <GlitterEffect />
       <Navbar />
       <Hero />
+      
+      {/* Offer Banner */}
+      <section className="py-6 bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20 border-y border-primary/30 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 mix-blend-overlay bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.8)_0%,transparent_100%)]"></div>
+        <div className="container mx-auto px-4 relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <div className="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center animate-pulse shrink-0 shadow-[0_0_15px_rgba(216,195,165,0.6)]">
+              <Sparkles className="w-6 h-6" />
+            </div>
+            <div>
+              <h3 className="text-xl md:text-2xl font-serif text-white mb-1">Limited Time Offer!</h3>
+              <p className="text-primary-foreground/90 font-medium">Get <span className="font-bold text-white text-lg">20% OFF</span> on all Bridal Bookings for Winter 2026</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4 w-full md:w-auto">
+            <BookingModal defaultService="Winter Bridal Offer 20% OFF">
+              <Button size="lg" className="w-full md:w-auto bg-white text-black hover:bg-gray-200 rounded-full font-bold px-8 shadow-[0_0_20px_rgba(255,255,255,0.5)] animate-pulse transition-all hover:scale-105">
+                Hurry Now - Claim Offer
+              </Button>
+            </BookingModal>
+          </div>
+        </div>
+      </section>
       
       <div id="portfolio">
         <Gallery />
