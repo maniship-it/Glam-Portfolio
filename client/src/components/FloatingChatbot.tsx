@@ -1,12 +1,21 @@
 import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Send } from "lucide-react";
+import { MessageCircle, X, Send, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
+type Message = {
+  id: number;
+  text: React.ReactNode;
+  isBot: boolean;
+  type?: 'system' | 'message';
+};
+
 export default function FloatingChatbot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Array<{id: number, text: React.ReactNode, isBot: boolean}>>([
-    { id: 1, text: <>Hi there! Welcome to <span className="text-white">Puja</span> <span className="text-primary italic">Glam</span> Makeup Studio. How can I help you today?</>, isBot: true }
+  const [isTyping, setIsTyping] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([
+    { id: 1, text: "Aditi has joined the chat.", isBot: true, type: 'system' },
+    { id: 2, text: <>Hi there! I'm Aditi from <span className="text-white font-serif tracking-tight">Puja</span> <span className="text-primary italic font-serif tracking-tight">Glam</span> Makeup Studio. How can I help you sparkle today?</>, isBot: true }
   ]);
   const [inputText, setInputText] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -19,34 +28,40 @@ export default function FloatingChatbot() {
     if (isOpen) {
       scrollToBottom();
     }
-  }, [messages, isOpen]);
+  }, [messages, isOpen, isTyping]);
 
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputText.trim()) return;
 
-    // Add user message
-    const newMsg = { id: Date.now(), text: inputText, isBot: false };
+    const userMessage = inputText.trim();
+    const newMsg: Message = { id: Date.now(), text: userMessage, isBot: false };
     setMessages(prev => [...prev, newMsg]);
     setInputText("");
+    setIsTyping(true);
 
-    // Simulate AI response based on keywords
+    // Simulate AI typing delay based on message length
     setTimeout(() => {
-      let responseText = "I'd be happy to help! For the fastest response, please book a session or contact Puja directly via WhatsApp at +91 82100 71659.";
-      const lowerInput = newMsg.text.toLowerCase();
+      let responseText = "I'd love to help you with that! For the most accurate details or to book a session, you can reach Puja directly via WhatsApp at +91 82100 71659. Is there anything specific about our bridal or party makeup you'd like to know?";
+      const lowerInput = userMessage.toLowerCase();
       
-      if (lowerInput.includes("price") || lowerInput.includes("cost") || lowerInput.includes("how much")) {
-        responseText = "Our Bridal Elegance package starts at ₹25,000, and Event Glamour starts at ₹10,000. You can check the Services section for more details!";
+      if (lowerInput.includes("price") || lowerInput.includes("cost") || lowerInput.includes("how much") || lowerInput.includes("charges")) {
+        responseText = "Our Bridal Elegance package starts at ₹25,000, and our Event Glamour package starts at ₹10,000. We also offer a Professional Bridal Masterclass at our Academy for ₹15,000! Would you like me to guide you to the booking page?";
       } else if (lowerInput.includes("location") || lowerInput.includes("address") || lowerInput.includes("where")) {
-        responseText = "We are located at MIG - 61, Shaheed Bhagat Singh Colony, Gango Bigha, Gaya, Bihar - 823001. We also serve clients across Jharkhand and Delhi NCR!";
-      } else if (lowerInput.includes("book") || lowerInput.includes("appointment")) {
-        responseText = "You can book an appointment by clicking the 'Book Session' button at the top of the page, which will connect you directly to our WhatsApp.";
+        responseText = "You can find us at MIG - 61, Shaheed Bhagat Singh Colony, Gango Bigha, Gaya, Bihar - 823001. We're also happy to travel for destination weddings across Jharkhand and Delhi NCR!";
+      } else if (lowerInput.includes("book") || lowerInput.includes("appointment") || lowerInput.includes("hire")) {
+        responseText = "Yay! You can secure your date by clicking the 'Book Session' button at the top of the page, which will connect you instantly to our WhatsApp. We can't wait to glam you up!";
       } else if (lowerInput.includes("timing") || lowerInput.includes("hours") || lowerInput.includes("open")) {
-        responseText = "We are open Monday to Sunday, from 9:00 AM to 6:00 PM.";
+        responseText = "Our studio doors are open Monday to Sunday, from 9:00 AM to 6:00 PM. We do accommodate early morning bridal bookings upon request!";
+      } else if (lowerInput.includes("hi") || lowerInput.includes("hello") || lowerInput.includes("hey")) {
+        responseText = "Hello gorgeous! How can I assist you today? Looking for bridal makeup, party glam, or maybe interested in our makeup academy?";
+      } else if (lowerInput.includes("academy") || lowerInput.includes("course") || lowerInput.includes("learn") || lowerInput.includes("teach")) {
+        responseText = "Our Academy offers incredible courses! We have a Professional Bridal Masterclass (₹15,000) and a Self-Grooming Intensive (₹5,000). You can check out the 'Academy' tab in the menu for the full syllabus!";
       }
 
       setMessages(prev => [...prev, { id: Date.now(), text: responseText, isBot: true }]);
-    }, 1000);
+      setIsTyping(false);
+    }, 1500 + Math.random() * 1000);
   };
 
   return (
@@ -69,14 +84,19 @@ export default function FloatingChatbot() {
         {/* Header */}
         <div className="bg-primary/10 border-b border-white/10 p-4 flex justify-between items-center backdrop-blur-md">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-serif font-bold text-sm">
-              <span className="tracking-tight">P</span><span className="italic font-light -ml-0.5">G</span>
+            <div className="relative">
+              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground">
+                <Sparkles className="w-5 h-5" />
+              </div>
+              <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-[#0a0a0a]"></div>
             </div>
             <div>
               <h3 className="font-serif font-medium tracking-tight text-white">
-                Puja <span className="text-primary italic">Glam</span> Assistant
+                Virtual MUA Assistant
               </h3>
-              <p className="text-xs text-primary">AI Support</p>
+              <p className="text-xs text-primary flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> Online
+              </p>
             </div>
           </div>
           <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white transition-colors">
@@ -85,20 +105,40 @@ export default function FloatingChatbot() {
         </div>
 
         {/* Messages Area */}
-        <div className="h-80 overflow-y-auto p-4 space-y-4 bg-background/50">
+        <div className="h-80 overflow-y-auto p-4 space-y-4 bg-background/95 scroll-smooth">
           {messages.map((msg) => (
-            <div key={msg.id} className={`flex ${msg.isBot ? 'justify-start' : 'justify-end'}`}>
-              <div 
-                className={`max-w-[80%] p-3 rounded-2xl text-sm ${
-                  msg.isBot 
-                    ? 'bg-white/10 text-gray-200 rounded-tl-sm' 
-                    : 'bg-primary text-primary-foreground rounded-tr-sm'
-                }`}
-              >
-                {msg.text}
-              </div>
+            <div key={msg.id} className={`flex flex-col ${msg.type === 'system' ? 'items-center' : msg.isBot ? 'items-start' : 'items-end'}`}>
+              {msg.type === 'system' ? (
+                <div className="text-xs text-muted-foreground my-2 bg-white/5 px-3 py-1 rounded-full border border-white/10">
+                  {msg.text}
+                </div>
+              ) : (
+                <div className="flex flex-col gap-1 max-w-[85%]">
+                  {msg.isBot && <span className="text-[10px] text-muted-foreground ml-1">Aditi</span>}
+                  <div 
+                    className={`p-3 text-sm shadow-sm ${
+                      msg.isBot 
+                        ? 'bg-[#1a1a1a] text-gray-200 rounded-2xl rounded-tl-sm border border-white/5' 
+                        : 'bg-primary text-primary-foreground rounded-2xl rounded-tr-sm'
+                    }`}
+                  >
+                    {msg.text}
+                  </div>
+                </div>
+              )}
             </div>
           ))}
+          
+          {isTyping && (
+            <div className="flex flex-col items-start gap-1">
+              <span className="text-[10px] text-muted-foreground ml-1">Aditi</span>
+              <div className="bg-[#1a1a1a] border border-white/5 rounded-2xl rounded-tl-sm p-3 w-16 flex justify-center gap-1">
+                <div className="w-1.5 h-1.5 bg-primary/60 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                <div className="w-1.5 h-1.5 bg-primary/60 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                <div className="w-1.5 h-1.5 bg-primary/60 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+              </div>
+            </div>
+          )}
           <div ref={messagesEndRef} />
         </div>
 
