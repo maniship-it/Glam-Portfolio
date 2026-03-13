@@ -39,62 +39,64 @@ export default function GlitterEffect() {
     return () => cancelAnimationFrame(animationFrameId);
   }, []);
 
-  useEffect(() => {
-    const handlePointerDown = (e: MouseEvent | TouchEvent) => {
-      const target = e.target as HTMLElement;
-      // Do not trigger on inputs, textareas, buttons, or links to avoid interference
-      if (['INPUT', 'TEXTAREA', 'BUTTON', 'A'].includes(target.tagName) || target.closest('button') || target.closest('a') || target.closest('form')) {
-        return;
-      }
+useEffect(() => {
+  const isTouchDevice =
+    'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-      let clientX, clientY;
-      if ('touches' in e) {
-        clientX = e.touches[0].clientX;
-        clientY = e.touches[0].clientY;
-      } else {
-        clientX = e.clientX;
-        clientY = e.clientY;
-      }
+  if (isTouchDevice) return;
 
-      // Add ripple
-      const newRipple = { id: Date.now(), x: clientX, y: clientY };
-      setRipples(prev => [...prev, newRipple]);
-      setTimeout(() => {
-        setRipples(prev => prev.filter(r => r.id !== newRipple.id));
-      }, 1000);
+  const handlePointerDown = (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
 
-      // Add sparkles
-      const newSparkles: Sparkle[] = [];
-      const colors = ['#d8c3a5', '#ffd700', '#e6e6fa', '#ffffff', '#ffdf00', '#c0c0c0', '#ff9eb5', '#b76e79'];
-      
-      for (let i = 0; i < 20; i++) {
-        newSparkles.push({
-          id: Date.now() + i,
-          x: clientX,
-          y: clientY,
-          color: colors[Math.floor(Math.random() * colors.length)],
-          size: Math.random() * 3 + 1, // smaller particles
-          vx: (Math.random() - 0.5) * 6, // gentler horizontal spread
-          vy: (Math.random() - 1) * 3 - 2, // slower initial upward burst
-        });
-      }
+    if (
+      ['INPUT', 'TEXTAREA', 'BUTTON', 'A'].includes(target.tagName) ||
+      target.closest('button') ||
+      target.closest('a') ||
+      target.closest('form')
+    ) {
+      return;
+    }
 
-      setSparkles(prev => [...prev, ...newSparkles]);
-      
-      // Remove after 2 seconds (they fall off screen quicker now)
-      setTimeout(() => {
-        setSparkles(prev => prev.filter(s => !newSparkles.find(ns => ns.id === s.id)));
-      }, 2000);
-    };
+    const clientX = e.clientX;
+    const clientY = e.clientY;
 
-    window.addEventListener('mousedown', handlePointerDown);
-    window.addEventListener('touchstart', handlePointerDown, { passive: true });
+    const newRipple = { id: Date.now(), x: clientX, y: clientY };
+    setRipples(prev => [...prev, newRipple]);
 
-    return () => {
-      window.removeEventListener('mousedown', handlePointerDown);
-      window.removeEventListener('touchstart', handlePointerDown);
-    };
-  }, []);
+    setTimeout(() => {
+      setRipples(prev => prev.filter(r => r.id !== newRipple.id));
+    }, 1000);
+
+    const newSparkles: Sparkle[] = [];
+    const colors = ['#d8c3a5','#ffd700','#e6e6fa','#ffffff','#ffdf00','#c0c0c0','#ff9eb5','#b76e79'];
+
+    for (let i = 0; i < 20; i++) {
+      newSparkles.push({
+        id: Date.now() + i,
+        x: clientX,
+        y: clientY,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        size: Math.random() * 3 + 1,
+        vx: (Math.random() - 0.5) * 6,
+        vy: (Math.random() - 1) * 3 - 2,
+      });
+    }
+
+    setSparkles(prev => [...prev, ...newSparkles]);
+
+    setTimeout(() => {
+      setSparkles(prev =>
+        prev.filter(s => !newSparkles.find(ns => ns.id === s.id))
+      );
+    }, 2000);
+  };
+
+  window.addEventListener('mousedown', handlePointerDown);
+
+  return () => {
+    window.removeEventListener('mousedown', handlePointerDown);
+  };
+}, []);
 
   return (
     <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden">
