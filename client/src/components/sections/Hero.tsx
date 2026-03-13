@@ -14,10 +14,10 @@ export default function Hero() {
           loop
           muted
           playsInline
-          poster="/src/assets/images/hero-indian.jpg"
+          poster="/images/hero-indian.webp"
           className="w-full h-full object-cover object-center opacity-80 scale-105"
         >
-          <source src="/src/assets/videos/hero-loop.mp4" type="video/mp4" />
+          <source src="/videos/hero-loop.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/40 to-transparent" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.5)_100%)]" />

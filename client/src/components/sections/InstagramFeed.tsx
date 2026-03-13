@@ -2,10 +2,10 @@ import { Instagram } from "lucide-react";
 
 export default function InstagramFeed() {
   const posts = [
-    { id: 1, src: "/src/assets/images/instagram/insta_1.jpg", likes: "1.2k", comments: 45 },
-    { id: 2, src: "/src/assets/images/instagram/insta_2.jpg", likes: "892", comments: 23 },
-    { id: 3, src: "/src/assets/images/instagram/insta_3.jpg", likes: "2.1k", comments: 104 },
-    { id: 4, src: "/src/assets/images/instagram/insta_4.jpg", likes: "3.4k", comments: 156 },
+    { id: 1, src: "/images/instagram/insta_1.webp", likes: "1.2k", comments: 45 },
+    { id: 2, src: "/images/instagram/insta_2.webp", likes: "892", comments: 23 },
+    { id: 3, src: "/images/instagram/insta_3.webp", likes: "2.1k", comments: 104 },
+    { id: 4, src: "/images/instagram/insta_4.webp", likes: "3.4k", comments: 156 },
   ];
 
   return (

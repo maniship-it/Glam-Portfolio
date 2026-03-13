@@ -30,7 +30,7 @@ export default function Academy() {
             loading="eager"
             decoding="async"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/50 to-transparent" />
         </div>
 
@@ -51,7 +51,7 @@ export default function Academy() {
               "Empowering the next generation of artists with techniques that transcend trends. Learn from the best makeup artist in Gaya."
             </p>
             <p className="text-lg text-primary font-medium mb-10">
-              — Puja, Lead Artist & Educator
+              — Puja, Lead Makeup Artist & Trainer
             </p>
             
             <AcademyModal defaultCourse="Academy Training Inquiry">

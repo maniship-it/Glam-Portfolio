@@ -94,7 +94,7 @@ export default function Navbar() {
               Testimonials
             </a>
             <Link href="/academy">
-              <a className={`transition-all duration-300 font-bold uppercase tracking-wider px-4 py-1.5 rounded-full border ${isAcademy ? 'text-black bg-[#C0C0C0] shadow-[0_0_15px_rgba(192,192,192,0.8)] border-[#C0C0C0]' : 'text-[#C0C0C0] border-[#C0C0C0]/50 hover:bg-[#C0C0C0] hover:text-black hover:shadow-[0_0_15px_rgba(192,192,192,0.8)]'}`}>
+              <a href="/"  className={`transition-all duration-300 font-bold uppercase tracking-wider px-4 py-1.5 rounded-full border ${isAcademy ? 'text-black bg-[#C0C0C0] shadow-[0_0_15px_rgba(192,192,192,0.8)] border-[#C0C0C0]' : 'text-[#C0C0C0] border-[#C0C0C0]/50 hover:bg-[#C0C0C0] hover:text-black hover:shadow-[0_0_15px_rgba(192,192,192,0.8)]'}`}>
                 Academy
               </a>
             </Link>

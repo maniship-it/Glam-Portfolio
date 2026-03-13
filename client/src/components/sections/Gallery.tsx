@@ -7,12 +7,12 @@ const CATEGORIES = ["All", "Bridal", "Party", "Editorial", "Natural"];
 
 // Replace src with actual instagram images
 const images = [
-  { id: 1, src: "/src/assets/images/gallery/bridal_indian_1.jpg", category: "Bridal", height: "h-[400px]", look: "Traditional Bride", service: "Bridal Elegance" },
-  { id: 2, src: "/src/assets/images/gallery/party_indian_1.jpg", category: "Party", height: "h-[300px]", look: "Evening Glam", service: "Event Glamour" },
-  { id: 3, src: "/src/assets/images/gallery/bridal_indian_2.jpg", category: "Bridal", height: "h-[500px]", look: "Modern Reception", service: "Bridal Elegance" },
-  { id: 4, src: "/src/assets/images/gallery/party_indian_2.jpg", category: "Party", height: "h-[350px]", look: "Soft Glam", service: "Event Glamour" },
-  { id: 5, src: "/src/assets/images/gallery/bridal_indian_3.jpg", category: "Bridal", height: "h-[450px]", look: "Haldi Look", service: "Bridal Elegance" },
-  { id: 6, src: "/src/assets/images/gallery/party_indian_3.jpg", category: "Natural", height: "h-[380px]", look: "No-Makeup Makeup", service: "Editorial" },
+  { id: 1, src: "/images/gallery/bridal_indian_1.webp", category: "Bridal", height: "h-[400px]", look: "Traditional Bride", service: "Bridal Elegance" },
+  { id: 2, src: "/images/gallery/party_indian_1.webp", category: "Party", height: "h-[300px]", look: "Evening Glam", service: "Event Glamour" },
+  { id: 3, src: "/images/gallery/bridal_indian_2.webp", category: "Bridal", height: "h-[500px]", look: "Modern Reception", service: "Bridal Elegance" },
+  { id: 4, src: "/images/gallery/party_indian_2.webp", category: "Party", height: "h-[350px]", look: "Soft Glam", service: "Event Glamour" },
+  { id: 5, src: "/images/gallery/bridal_indian_3.webp", category: "Bridal", height: "h-[450px]", look: "Bridal Look", service: "Bridal Elegance" },
+  { id: 6, src: "/images/gallery/party_indian_3.webp", category: "Natural", height: "h-[380px]", look: "No-Makeup Makeup", service: "Editorial" },
 ];
 
 export default function Gallery() {
@@ -93,10 +93,11 @@ export default function Gallery() {
                 
                 <img 
                   src={img.src} 
-                  alt={`${img.category} makeup look`}
+                  alt={`${img.category} makeup look by Puja Glam Makeup Studio`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   loading="lazy"
                   decoding="async"
+                  fetchPriority="low"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                   <div>

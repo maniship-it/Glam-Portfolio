@@ -83,8 +83,8 @@ export default function Home() {
         
         <div className="container mx-auto px-4 relative z-10">
           <BeforeAfter 
-            beforeImage="/src/assets/images/before-after/before-indian.jpg"
-            afterImage="/src/assets/images/before-after/after-indian.jpg"
+            beforeImage="/images/gallery/before.webp"
+            afterImage="/images/gallery/after.webp"
             title="The Art of Transformation"
             description="Swipe to witness the meticulous detail and flawless finish of our signature glam process."
           />
