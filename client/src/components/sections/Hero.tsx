@@ -50,7 +50,7 @@ export default function Hero() {
           >
             Elevating your natural beauty with enterprise-class artistry.
             Top-rated professional makeup services in Gaya, Bihar. Specializing
-            in flawless bridal transformations across Jharkhand & Delhi NCR.
+            in flawless bridal transformations across Bihar, Jharkhand & Delhi NCR.
           </motion.h3>
 
           <motion.div

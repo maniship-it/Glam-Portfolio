@@ -58,7 +58,7 @@ export default function Home() {
             </div>
             <div>
               <h3 className="text-xl md:text-2xl font-serif text-white mb-1">Limited Time Offer!</h3>
-              <p className="text-primary-foreground/90 font-medium">Get <span className="font-bold text-white text-lg">20% OFF</span> on all Bridal Bookings for Winter 2026</p>
+              <p className="text-primary-foreground/90 font-medium">Get <span className="font-bold text-white text-lg">20% OFF</span> on all Bridal Bookings for Summer 2026</p>
             </div>
           </div>
           <div className="flex items-center gap-4 w-full md:w-auto">
