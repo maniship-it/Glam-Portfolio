@@ -74,29 +74,40 @@ export default function FloatingChatbot() {
   ========================================
   */
 
-  const getAIResponse = async (message: string) => {
+const getAIResponse = async (message: string) => {
+  try {
 
-    try {
+    // take last 6 messages for context (lightweight memory)
+    const history = messages
+      .filter(m => m.type !== "system")
+      .slice(-6)
+      .map(m => ({
+        role: m.isBot ? "assistant" : "user",
+        content: typeof m.text === "string" ? m.text : ""
+      }));
 
-      const res = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ message })
-      });
+    // add current message
+    history.push({
+      role: "user",
+      content: message
+    });
 
-      const data = await res.json();
+    const res = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ messages: history })
+    });
 
-      return data.reply;
+    const data = await res.json();
 
-    } catch (error) {
+    return data.reply;
 
-      return "Sorry, I'm having trouble connecting right now. Please try again or WhatsApp us for quick help.";
-
-    }
-
-  };
+  } catch {
+    return "Sorry, I'm having trouble right now. Please try again or WhatsApp us.";
+  }
+};
 
   /*
   ========================================
@@ -182,7 +193,7 @@ export default function FloatingChatbot() {
             <div>
 
               <h3 className="font-serif font-medium tracking-tight text-white">
-                Virtual MUA Assistant
+                User Experience Assistant
               </h3>
 
               <p className="text-xs text-primary flex items-center gap-1">
