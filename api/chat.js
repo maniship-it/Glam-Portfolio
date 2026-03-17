@@ -1,5 +1,6 @@
 export default async function handler(req, res) {
 
+  // Only allow POST
   if (req.method !== "POST") {
     return res.status(405).json({ reply: "Method not allowed" });
   }
@@ -7,6 +8,10 @@ export default async function handler(req, res) {
   try {
 
     const { message } = req.body;
+
+    if (!message) {
+      return res.status(400).json({ reply: "No message provided." });
+    }
 
     const SYSTEM_PROMPT = `
 You are Aditi, senior customer assistant at Puja Glam Makeup Studio.
@@ -97,29 +102,34 @@ never sound robotic
 never say you are an AI
 `;
 
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-
-      method: "POST",
-
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.GROQ_API_KEY}`
-      },
-
-      body: JSON.stringify({
-        model: "llama-3.1-8b-instant",
-        messages: [
-          { role: "system", content: SYSTEM_PROMPT },
-          { role: "user", content: message }
-        ],
-        temperature: 0.85
-      })
-
-    });
+    const response = await fetch(
+      "https://api.groq.com/openai/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${process.env.GROQ_API_KEY}`
+        },
+        body: JSON.stringify({
+          model: "llama-3.1-8b-instant",
+          messages: [
+            { role: "system", content: SYSTEM_PROMPT },
+            { role: "user", content: message }
+          ],
+          temperature: 0.7
+        })
+      }
+    );
 
     const data = await response.json();
 
-    const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't answer that.";
+    console.log("Groq response:", data);
+
+    let reply = "Sorry, something went wrong.";
+
+    if (data?.choices && data.choices.length > 0) {
+      reply = data.choices[0].message?.content || reply;
+    }
 
     return res.status(200).json({ reply });
 
@@ -128,7 +138,7 @@ never say you are an AI
     console.error("Chat API error:", error);
 
     return res.status(500).json({
-      reply: "Sorry, something went wrong. Please try again."
+      reply: "Sorry, I’m having trouble responding right now. Please try again."
     });
 
   }
