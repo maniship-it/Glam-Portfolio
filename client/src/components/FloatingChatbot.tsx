@@ -18,7 +18,7 @@ trainingData.js
 .env
 */
 
-const API_URL = "https://glam-portfolio.onrender.com/chat"; // CHANGE THIS
+const API_URL = "https://glam-portfolio.onrender.com"; // CHANGE THIS
 
 type Message = {
   id: number;
