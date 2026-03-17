@@ -18,8 +18,7 @@ trainingData.js
 .env
 */
 
-const API_URL = "https://glam-portfolio.onrender.com"; // CHANGE THIS
-
+const API_URL = "/api/chat";
 type Message = {
   id: number;
   text: React.ReactNode;
@@ -79,7 +78,7 @@ export default function FloatingChatbot() {
 
     try {
 
-      const res = await fetch(`${API_URL.replace(/\/$/,"")}/chat`, {
+      const res = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -151,9 +150,8 @@ export default function FloatingChatbot() {
 
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-14 h-14 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(220,178,106,0.4)] transition-transform hover:scale-110 ${
-          isOpen ? "scale-0" : "scale-100"
-        }`}
+        className={`w-14 h-14 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(220,178,106,0.4)] transition-transform hover:scale-110 ${isOpen ? "scale-0" : "scale-100"
+          }`}
       >
         <MessageCircle className="w-6 h-6" />
       </button>
@@ -161,9 +159,8 @@ export default function FloatingChatbot() {
       {/* Chat Window */}
 
       <div
-        className={`absolute bottom-0 right-0 w-80 sm:w-96 bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl overflow-hidden transition-all origin-bottom-right ${
-          isOpen ? "scale-100 opacity-100" : "scale-0 opacity-0 pointer-events-none"
-        }`}
+        className={`absolute bottom-0 right-0 w-80 sm:w-96 bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl overflow-hidden transition-all origin-bottom-right ${isOpen ? "scale-100 opacity-100" : "scale-0 opacity-0 pointer-events-none"
+          }`}
       >
 
         {/* Header */}
@@ -214,13 +211,12 @@ export default function FloatingChatbot() {
 
             <div
               key={msg.id}
-              className={`flex flex-col ${
-                msg.type === "system"
+              className={`flex flex-col ${msg.type === "system"
                   ? "items-center"
                   : msg.isBot
-                  ? "items-start"
-                  : "items-end"
-              }`}
+                    ? "items-start"
+                    : "items-end"
+                }`}
             >
 
               {msg.type === "system" ? (
@@ -240,11 +236,10 @@ export default function FloatingChatbot() {
                   )}
 
                   <div
-                    className={`p-3 text-sm shadow-sm ${
-                      msg.isBot
+                    className={`p-3 text-sm shadow-sm ${msg.isBot
                         ? "bg-[#1a1a1a] text-gray-200 rounded-2xl rounded-tl-sm border border-white/5"
                         : "bg-primary text-primary-foreground rounded-2xl rounded-tr-sm"
-                    }`}
+                      }`}
                   >
                     {msg.text}
                   </div>
