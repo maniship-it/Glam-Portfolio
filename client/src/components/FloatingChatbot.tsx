@@ -18,7 +18,7 @@ trainingData.js
 .env
 */
 
-const API_URL = "https://glam-portfolio.onrender.com"; // CHANGE THIS
+const API_URL = "https://glam-portfolio.onrender.com/chat"; // CHANGE THIS
 
 type Message = {
   id: number;
@@ -79,7 +79,7 @@ export default function FloatingChatbot() {
 
     try {
 
-      const res = await fetch(API_URL, {
+      const res = await fetch(`${API_URL.replace(/\/$/,"")}/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

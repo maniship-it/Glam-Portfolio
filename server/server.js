@@ -1,5 +1,5 @@
 import express from "express";
-import  dotenv  from "dotenv";
+import dotenv from "dotenv";
 import cors from "cors";
 import axios from "axios";
 import { BUSINESS_CONTEXT } from "./trainingData.js";
@@ -11,18 +11,37 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const PORT = process.env.PORT || 5000;
 const API_KEY = process.env.GROQ_API_KEY;
+
+/*
+DEBUG CHECK
+*/
+if (!API_KEY) {
+  console.error("❌ GROQ_API_KEY not found in .env");
+  process.exit(1);
+}
+
+app.get("/", (req, res) => {
+  res.send("Puja Glam AI Server Running");
+});
 
 app.post("/chat", async (req, res) => {
 
-  const userMessage = req.body.message;
+const userMessage = req.body?.message;
+
+if (!userMessage) {
+  return res.status(400).json({
+    reply: "Please send a valid message."
+  });
+}
 
   try {
 
     const response = await axios.post(
       "https://api.groq.com/openai/v1/chat/completions",
       {
-        model: "llama3-8b-8192",
+        model: "llama-3.1-8b-instant",
         messages: [
           {
             role: "system",
@@ -47,19 +66,19 @@ app.post("/chat", async (req, res) => {
 
     res.json({ reply });
 
-  } catch (err) {
+  } catch (error) {
 
-    console.error(err);
+    console.error("AI ERROR:", error.response?.data || error.message);
 
-    res.json({
+    res.status(500).json({
       reply:
-        "I’m sorry, something went wrong. You can also message us directly on WhatsApp for quick help."
+        "Sorry, something went wrong. Please try again or contact us on WhatsApp."
     });
 
   }
 
 });
 
-app.listen(5000, () => {
-  console.log("Puja Glam AI running on port 5000");
+app.listen(PORT, () => {
+  console.log(`🚀 Puja Glam AI running on port ${PORT}`);
 });
