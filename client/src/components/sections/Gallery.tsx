@@ -13,7 +13,7 @@ const images = [
   { id: 4, src: "/images/gallery/party_indian_2.webp", category: "Party", height: "h-[350px]", look: "Soft Glam", service: "Event Glamour" },
   { id: 5, src: "/images/gallery/bridal_indian_3.webp", category: "Bridal", height: "h-[450px]", look: "Bridal Look", service: "Bridal Elegance" },
   { id: 6, src: "/images/gallery/party_indian_3.webp", category: "Natural", height: "h-[380px]", look: "No-Makeup Makeup", service: "Editorial" },
-];
+  { id: 7, src: "/images/gallery/bridal_indian_4.webp", category: "Bridal", height: "h-[420px]", look: "Bridal Glam Look", service: "Bridal Elegance" }];
 
 export default function Gallery() {
   const [filter, setFilter] = useState("All");
