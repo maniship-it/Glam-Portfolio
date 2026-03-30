@@ -9,7 +9,7 @@ const CATEGORIES = ["All", "Bridal", "Party", "Editorial", "Natural"];
 const images = [
   { id: 1, src: "/images/gallery/bridal_indian_1.webp", category: "Bridal", height: "h-[400px]", look: "Traditional Bride", service: "Bridal Elegance" },
   { id: 2, src: "/images/gallery/party_indian_1.webp", category: "Party", height: "h-[300px]", look: "Evening Glam", service: "Event Glamour" },
-  { id: 3, src: "/images/gallery/bridal_indian_2.webp", category: "Bridal", height: "h-[500px]", look: "Modern Reception", service: "Bridal Elegance" },
+  { id: 3, src: "/images/gallery/after.webp", category: "Bridal", height: "h-[500px]", look: "Modern Reception", service: "Bridal Elegance" },
   { id: 4, src: "/images/gallery/party_indian_2.webp", category: "Party", height: "h-[350px]", look: "Soft Glam", service: "Event Glamour" },
   { id: 5, src: "/images/gallery/bridal_indian_3.webp", category: "Bridal", height: "h-[450px]", look: "Bridal Look", service: "Bridal Elegance" },
   { id: 6, src: "/images/gallery/party_indian_3.webp", category: "Natural", height: "h-[380px]", look: "No-Makeup Makeup", service: "Editorial" },
