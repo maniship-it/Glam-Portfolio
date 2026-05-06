@@ -26,7 +26,7 @@ export default function Footer() {
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.25 8.001c0-2.316 1.83-4.148 4.148-4.148h11.204c2.316 0 4.148 1.832 4.148 4.148v7.998c0 2.316-1.832 4.148-4.148 4.148H6.398c-2.316 0-4.148-1.832-4.148-4.148V8.001z"/><path d="M9.75 15.525v-7.05l5.55 3.525-5.55 3.525z"/></svg>
               </a>
               <a href="https://www.instagram.com/puja_glam_makeup_studio" aria-label="Instagram" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary transition-colors">
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
               </a>
               <a href="https://wa.me/918210071659" aria-label="WhatsApp" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary transition-colors">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
@@ -53,7 +53,7 @@ export default function Footer() {
             <ul className="space-y-4 text-muted-foreground">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-primary shrink-0 mt-1" />
-                <span>MIG - 61, Shaheed Bhagat Singh Colony, Gango Bigha, Gaya, Bihar - 823001</span>
+                <span>Chandauti More, Gaya, Bihar - 823001</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
@@ -103,13 +103,13 @@ export default function Footer() {
                 <div className="space-y-4 text-sm leading-relaxed">
                   <p>By booking a session or academy course with <span className="text-white">Puja</span> <span className="text-primary italic">Glam</span> Makeup Studio, you agree to the following terms and conditions.</p>
                   <h3 className="text-white font-medium text-lg mt-4">1. Bookings & Payments</h3>
-                  <p>To secure your date, a non-refundable advance payment is required. The remaining balance must be cleared on or before the day of the event. All course fees for the Makeup Academy must be paid as per the agreed schedule.</p>
+                  <p>To secure your date, a non-refundable advance payment is required. The remaining balance must be cleared on or before the day of the event. All course fees for the Makeup Academy must be paid in full before the course begins.</p>
                   <h3 className="text-white font-medium text-lg mt-4">2. Cancellations & Rescheduling</h3>
-                  <p>Advance deposits are non-refundable in the event of cancellation by the client. In case of rescheduling due to unforeseen circumstances, we will do our best to accommodate the new date subject to availability, but this is not guaranteed.</p>
+                  <p>Advance deposits are non-refundable in the event of cancellation by the client. In case of rescheduling due to unforeseen circumstances, we will do our best to accommodate the new date based on availability.</p>
                   <h3 className="text-white font-medium text-lg mt-4">3. Travel & Accommodation</h3>
-                  <p>For bookings outside Gaya, Bihar (including Jharkhand and Delhi NCR), additional travel, lodging, and logistics charges will apply and must be borne by the client unless stated otherwise in a custom quote.</p>
+                  <p>For bookings outside Gaya, Bihar (including Jharkhand and Delhi NCR), additional travel, lodging, and logistics charges will apply and must be borne by the client unless stated otherwise.</p>
                   <h3 className="text-white font-medium text-lg mt-4">4. Allergies & Skin Conditions</h3>
-                  <p>It is the client's responsibility to inform us of any skin conditions, allergies, or sensitivities prior to the application of makeup. <span className="text-white">Puja</span> <span className="text-primary italic">Glam</span> Makeup Studio will not be held liable for any allergic reactions or skin complications.</p>
+                  <p>It is the client's responsibility to inform us of any skin conditions, allergies, or sensitivities prior to the application of makeup. <span className="text-white">Puja</span> <span className="text-primary italic">Glam</span> is not responsible for adverse reactions that could have been prevented with prior disclosure.</p>
                   <p className="mt-6 text-xs text-gray-500">Last updated: {new Date().toLocaleDateString()}</p>
                 </div>
               </DialogContent>
