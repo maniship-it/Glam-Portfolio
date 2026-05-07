@@ -26,13 +26,13 @@ app.get("/", (req, res) => {
   res.send("Puja Glam AI Server Running");
 });
 
-app.post("/chat", async (req, res) => {
+app.post("/api/chat", async (req, res) => {
 
-const userMessage = req.body?.message;
+const userMessages = req.body?.messages;
 
-if (!userMessage) {
+if (!userMessages || !Array.isArray(userMessages)) {
   return res.status(400).json({
-    reply: "Please send a valid message."
+    reply: "Please send valid messages."
   });
 }
 
@@ -47,10 +47,7 @@ if (!userMessage) {
             role: "system",
             content: BUSINESS_CONTEXT
           },
-          {
-            role: "user",
-            content: userMessage
-          }
+          ...userMessages
         ],
         temperature: 0.85
       },
