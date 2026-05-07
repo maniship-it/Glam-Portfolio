@@ -20,8 +20,7 @@ Brand: Puja Glam Makeup Studio
 Founder: Puja (Lead Makeup Artist)
 
 Location:
-MIG-61 Shaheed Bhagat Singh Colony
-Gango Bigha
+Chandauti Road, Near Pyara Palace
 Gaya Bihar 823001
 
 Studio Reputation:
