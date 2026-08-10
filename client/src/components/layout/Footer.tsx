@@ -1,6 +1,7 @@
 import { MapPin, Phone, Mail, Clock, Map } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { CONTACT_INFO } from "@shared/contact.js";
 
 export default function Footer() {
   return (
@@ -53,7 +54,7 @@ export default function Footer() {
             <ul className="space-y-4 text-muted-foreground">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-primary shrink-0 mt-1" />
-                <span>Chandauti More, Gaya, Bihar - 823001</span>
+                <span>{CONTACT_INFO.address}</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-primary shrink-0" />

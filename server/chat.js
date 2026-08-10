@@ -8,8 +8,37 @@ const MAX_HISTORY = 10;
 const MAX_CONTENT_LENGTH = 2000;
 const REQUEST_TIMEOUT_MS = 20000;
 
+/*
+Kept fairly low on purpose: the assistant has to quote the studio address and
+phone number verbatim, and a hotter setting made it paraphrase them.
+*/
+const TEMPERATURE = 0.6;
+
 const GENERIC_ERROR =
   "Sorry, something went wrong. Please try again or contact us on WhatsApp at +91 82100 71659.";
+
+/** Reads the key defensively — a value pasted with quotes or stray whitespace is still usable. */
+function readApiKey() {
+  const raw = process.env.GROQ_API_KEY;
+  if (typeof raw !== "string") return "";
+  return raw.trim().replace(/^["']|["']$/g, "");
+}
+
+/**
+ * Deployment diagnostic for `GET /api/chat`. Reports whether the Groq key is
+ * visible to this deployment without ever revealing the key itself.
+ */
+export function getChatHealth() {
+  const key = readApiKey();
+  return {
+    status: "ok",
+    model: MODEL,
+    groqConfigured: key.length > 0,
+    hint: key.length > 0
+      ? "GROQ_API_KEY is set for this deployment."
+      : "GROQ_API_KEY is missing. Add it to this environment (on Vercel: Settings > Environment Variables, ticking Production, Preview and Development) and redeploy.",
+  };
+}
 
 /**
  * Drops anything the Groq API would reject: unknown roles, non-string content
@@ -44,7 +73,7 @@ export async function generateChatReply(messages) {
     };
   }
 
-  const apiKey = process.env.GROQ_API_KEY;
+  const apiKey = readApiKey();
 
   if (!apiKey) {
     console.error("Chat error: GROQ_API_KEY is not configured");
@@ -65,7 +94,7 @@ export async function generateChatReply(messages) {
       body: JSON.stringify({
         model: MODEL,
         messages: [{ role: "system", content: BUSINESS_CONTEXT }, ...history],
-        temperature: 0.85,
+        temperature: TEMPERATURE,
       }),
       signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
     });

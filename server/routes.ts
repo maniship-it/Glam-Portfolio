@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 // plain ESM module, shared with the Vercel serverless function in api/chat.js
-import { generateChatReply } from "./chat.js";
+import { generateChatReply, getChatHealth } from "./chat.js";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -19,6 +19,11 @@ export async function registerRoutes(
   app.post("/api/chat", async (req, res) => {
     const { status, reply } = await generateChatReply(req.body?.messages);
     res.status(status).json({ reply });
+  });
+
+  // Open this URL in a browser to check whether the server can see GROQ_API_KEY.
+  app.get("/api/chat", (_req, res) => {
+    res.status(200).json(getChatHealth());
   });
 
   return httpServer;

@@ -83,16 +83,35 @@ That endpoint is implemented once in `server/chat.js` and exposed by two entry p
 | Vercel (serverless) | `api/chat.js` |
 | Express (`npm run dev` / `npm start`) | `server/routes.ts` |
 
-Both need a Groq API key in the environment — without it the widget falls back to
-a "contact us on WhatsApp" message:
+Both need a Groq API key in the environment — without it the widget replies
+"Our assistant is offline for a moment…":
 
 ```bash
 # .env (local) or project environment variables (Vercel)
 GROQ_API_KEY=your_groq_api_key
 ```
 
-The assistant's persona, services and canonical contact details live in
-`server/trainingData.js` (`BUSINESS_CONTEXT`).
+On Vercel, tick **Production, Preview and Development** when adding the variable,
+then redeploy — a variable scoped only to Production is invisible to preview
+deployments, which is the usual cause of an "offline" assistant on a preview URL.
+
+### Checking the deployment
+
+Open `/api/chat` in a browser on the deployed site. It reports whether the key is
+visible, without ever revealing it:
+
+```json
+{ "status": "ok", "model": "llama-3.1-8b-instant", "groqConfigured": true, "hint": "..." }
+```
+
+If `groqConfigured` is `false`, the key is not reaching that deployment.
+
+### Contact details and the assistant's persona
+
+`shared/contact.js` is the single source of truth for the studio address, phone
+and WhatsApp number. It feeds both the site footer and the assistant's system
+prompt (`server/trainingData.js`), so the bot cannot quote an address that
+disagrees with the site. Change the address there and nowhere else.
 
 > **Note:** a static-only host cannot serve `/api/chat`. Deploy to Vercel (or run the
 > Express server) so the API route exists.

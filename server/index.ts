@@ -1,3 +1,6 @@
+// Loads .env for local runs. On Vercel/Replit the variables are already in the
+// environment and this is a no-op. Must come before anything reads process.env.
+import "dotenv/config";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
