@@ -8,7 +8,12 @@
     <meta name="author" content="Puja Glam Makeup Studio" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://www.pujaglam.com/" />
-    <link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+    <!--
+      Largest Contentful Paint element: the hero poster behind the headline.
+      The preload tag is generated from image-manifest.json at build time by
+      vite-plugin-hero-preload, so it always matches the <img> in Hero.tsx.
+    -->
+    <!--hero-preload-->
     <!-- Site Verifications -->
     <meta name="google-site-verification" content="YOUR_GOOGLE_VERIFICATION_CODE" />
     <meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE" />
@@ -18,7 +23,7 @@
     <meta property="og:url" content="https://www.pujaglam.com/" />
     <meta property="og:title" content="Puja Glam Makeup Studio | Best Makeup Artist in Gaya, Bihar" />
     <meta property="og:description" content="Top-rated luxury makeup studio specializing in flawless bridal transformations and event glamour. Book your session today." />
-    <meta property="og:image" content="https://www.pujaglam.com/preview-image.webp" />
+    <meta property="og:image" content="https://www.pujaglam.com/opengraph.jpg" />
     <meta property="og:site_name" content="Puja Glam Makeup Studio" />
     <meta property="og:locale" content="en_IN" />
 
@@ -27,7 +32,7 @@
     <meta name="twitter:url" content="https://www.pujaglam.com/" />
     <meta name="twitter:title" content="Puja Glam Makeup Studio | Best Makeup Artist in Gaya, Bihar" />
     <meta name="twitter:description" content="Top-rated luxury makeup studio specializing in flawless bridal transformations and event glamour." />
-    <meta name="twitter:image" content="https://www.pujaglam.com/preview-image.webp" />
+    <meta name="twitter:image" content="https://www.pujaglam.com/opengraph.jpg" />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
@@ -41,39 +46,61 @@
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     </noscript>
     <title>Puja Glam Makeup Studio | Best Bridal Makeup Artist in Gaya, Bihar</title>
-    <!-- Google Tag Manager -->
-      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-TJNZHFNB');</script>
-      <!-- End Google Tag Manager -->
-    <!-- Google Analytics (GA4) Placeholder -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FNVC2CFZLW"></script>
+    <!--
+      Analytics (GTM + GA4).
+
+      These used to load during head parsing, competing with the page's own
+      JS and CSS for bandwidth and main-thread time. They are now queued until
+      the page has loaded and the browser is idle, so they no longer delay
+      first paint or interactivity. dataLayer/gtag are defined up front, so
+      any event pushed before the tags arrive is buffered and replayed.
+    -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-FNVC2CFZLW');
+      dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+
+      (function (w, d) {
+        var loaded = false;
+
+        function loadAnalytics() {
+          if (loaded) return;
+          loaded = true;
+
+          ['https://www.googletagmanager.com/gtm.js?id=GTM-TJNZHFNB',
+           'https://www.googletagmanager.com/gtag/js?id=G-FNVC2CFZLW'
+          ].forEach(function (src) {
+            var s = d.createElement('script');
+            s.async = true;
+            s.src = src;
+            d.head.appendChild(s);
+          });
+        }
+
+        function schedule() {
+          if (w.requestIdleCallback) w.requestIdleCallback(loadAnalytics, { timeout: 4000 });
+          else w.setTimeout(loadAnalytics, 2000);
+        }
+
+        if (d.readyState === 'complete') schedule();
+        else w.addEventListener('load', schedule, { once: true });
+
+        // Never miss a real visitor interaction while waiting for idle.
+        ['pointerdown', 'keydown', 'touchstart'].forEach(function (evt) {
+          w.addEventListener(evt, loadAnalytics, { once: true, passive: true });
+        });
+      })(window, document);
     </script>
 
-    <!-- Hotjar/Clarity Placeholder -->
-    <script>
-      // Hotjar Tracking Code Placeholder
-      (function(h,o,t,j,a,r){
-          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-          h._hjSettings={hjid:0,hjsv:6};
-          console.log("Hotjar/Clarity analytics loaded.");
-      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-    </script>
-  
       <script type="application/ld+json">
         {
         "@context": "https://schema.org",
         "@type": "BeautySalon",
         "name": "Puja Glam Makeup Studio",
         "url": "https://www.pujaglam.com",
-        "image": "https://www.pujaglam.com/preview-image.webp",
+        "image": "https://www.pujaglam.com/opengraph.jpg",
         "telephone": "+918210071659",
         "address": {
         "@type": "PostalAddress",

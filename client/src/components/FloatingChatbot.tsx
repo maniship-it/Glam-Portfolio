@@ -28,10 +28,35 @@ type Message = {
   type?: "system" | "message";
 };
 
+type Status = "checking" | "online" | "offline";
+
+const STATUS_LABEL: Record<Status, string> = {
+  checking: "Checking…",
+  online: "Online",
+  offline: "Offline"
+};
+
+/* Tailwind needs literal class names, so map rather than interpolate. */
+const STATUS_DOT: Record<Status, string> = {
+  checking: "bg-amber-400",
+  online: "bg-green-500",
+  offline: "bg-gray-500"
+};
+
+const STATUS_TEXT: Record<Status, string> = {
+  checking: "text-amber-400",
+  online: "text-primary",
+  offline: "text-gray-400"
+};
+
+/* How often to re-check the backend while the chat window is open. */
+const HEALTH_POLL_MS = 60000;
+
 export default function FloatingChatbot() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
+  const [status, setStatus] = useState<Status>("checking");
 
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -79,6 +104,67 @@ export default function FloatingChatbot() {
 
   /*
   ========================================
+  LIVE ONLINE / OFFLINE STATUS
+  ========================================
+  The badge reflects reality instead of always claiming "Online":
+   - the browser being offline,
+   - the chat API being unreachable,
+   - the API being up but without a configured key (GET /api/chat health check),
+   - and any send that actually fails.
+  */
+
+  const checkStatus = async () => {
+    if (typeof navigator !== "undefined" && navigator.onLine === false) {
+      setStatus("offline");
+      return;
+    }
+
+    try {
+      const res = await fetch(API_URL, {
+        method: "GET",
+        cache: "no-store",
+        headers: { Accept: "application/json" }
+      });
+
+      if (!res.ok) {
+        setStatus("offline");
+        return;
+      }
+
+      const health = await res.json();
+      setStatus(health?.groqConfigured ? "online" : "offline");
+    } catch {
+      setStatus("offline");
+    }
+  };
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const run = () => {
+      if (!cancelled) void checkStatus();
+    };
+
+    run();
+
+    // Only poll while the panel is open — no background traffic when it is closed.
+    const interval = isOpen ? window.setInterval(run, HEALTH_POLL_MS) : undefined;
+
+    const goOffline = () => setStatus("offline");
+
+    window.addEventListener("online", run);
+    window.addEventListener("offline", goOffline);
+
+    return () => {
+      cancelled = true;
+      if (interval) window.clearInterval(interval);
+      window.removeEventListener("online", run);
+      window.removeEventListener("offline", goOffline);
+    };
+  }, [isOpen]);
+
+  /*
+  ========================================
   FUNCTION THAT CALLS YOUR AI SERVER
   ========================================
   */
@@ -114,15 +200,20 @@ const getAIResponse = async (message: string) => {
     const data = await res.json().catch(() => null);
 
     if (typeof data?.reply === "string" && data.reply.trim() !== "") {
+      // A reply on a non-2xx status means the API answered but could not reach
+      // the model, so the assistant is genuinely unavailable.
+      setStatus(res.ok ? "online" : "offline");
       return data.reply;
     }
 
     console.error("Chat request failed:", res.status, data);
+    setStatus("offline");
 
     return FALLBACK_REPLY;
 
   } catch (error) {
     console.error("Chat request failed:", error);
+    setStatus("offline");
     return FALLBACK_REPLY;
   }
 };
@@ -210,7 +301,9 @@ const getAIResponse = async (message: string) => {
                 <Sparkles className="w-5 h-5" />
               </div>
 
-              <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-[#0a0a0a]"></div>
+              <div
+                className={`absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-[#0a0a0a] ${STATUS_DOT[status]}`}
+              ></div>
 
             </div>
 
@@ -220,9 +313,14 @@ const getAIResponse = async (message: string) => {
                 User Experience Assistant
               </h3>
 
-              <p className="text-xs text-primary flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                Online
+              <p
+                className={`text-xs flex items-center gap-1 ${STATUS_TEXT[status]}`}
+                aria-live="polite"
+              >
+                <span
+                  className={`w-1.5 h-1.5 rounded-full ${STATUS_DOT[status]} ${status === "online" ? "animate-pulse" : ""}`}
+                ></span>
+                {STATUS_LABEL[status]}
               </p>
 
             </div>

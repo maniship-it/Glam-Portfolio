@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { responsiveSrcSet } from "@/lib/images";
 
 interface BeforeAfterProps {
   beforeImage: string;
@@ -79,9 +80,11 @@ export default function BeforeAfter({ beforeImage, afterImage, title = "The Tran
         <div className="absolute inset-0 bg-muted/50 animate-pulse -z-10" />
 
         {/* After Image (Background) */}
-        <img 
-          src={afterImage} 
-          alt="Glamorous makeup look after transformation" 
+        <img
+          src={afterImage}
+          srcSet={responsiveSrcSet(afterImage)}
+          sizes="(max-width: 1024px) 100vw, 1024px"
+          alt="Glamorous makeup look after transformation"
           className="absolute inset-0 w-full h-full object-cover"
           draggable="false"
           loading="lazy"
@@ -96,9 +99,11 @@ export default function BeforeAfter({ beforeImage, afterImage, title = "The Tran
           className="absolute inset-0 overflow-hidden"
           style={{ width: `${sliderPosition}%` }}
         >
-          <img 
-            src={beforeImage} 
-            alt="Natural bare face before makeup" 
+          <img
+            src={beforeImage}
+            srcSet={responsiveSrcSet(beforeImage)}
+            sizes="(max-width: 1024px) 100vw, 1024px"
+            alt="Natural bare face before makeup"
             className="absolute inset-0 w-full h-full object-cover"
             style={{ width: '100vw', maxWidth: containerRef.current?.offsetWidth || '100%' }}
             draggable="false"

@@ -1,24 +1,88 @@
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BookingModal } from "@/components/BookingModal";
+import { responsiveSrcSet } from "@/lib/images";
+
+const HERO_POSTER = "/images/hero-poster.webp";
+
+/*
+The background loop is ~700KB. Fetching it during initial load competed with
+the page's own CSS/JS and delayed first paint, so it is attached only once the
+page has loaded and the browser is idle. Until then the (much smaller) poster
+image is what visitors see, which is the Largest Contentful Paint element.
+*/
+function useDeferredVideo() {
+  const [enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    // Respect users who asked for less motion or less data.
+    const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const connection = (navigator as any).connection;
+    const saveData = connection?.saveData === true;
+    const slowNetwork = /(^|-)2g$/.test(connection?.effectiveType ?? "");
+
+    if (reducedMotion || saveData || slowNetwork) return;
+
+    let cancelled = false;
+    const start = () => {
+      if (cancelled) return;
+      if (window.requestIdleCallback) {
+        window.requestIdleCallback(() => !cancelled && setEnabled(true), { timeout: 3000 });
+      } else {
+        window.setTimeout(() => !cancelled && setEnabled(true), 1200);
+      }
+    };
+
+    if (document.readyState === "complete") start();
+    else window.addEventListener("load", start, { once: true });
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", start);
+    };
+  }, []);
+
+  return enabled;
+}
 
 export default function Hero() {
+  const showVideo = useDeferredVideo();
+
   return (
     <div className="relative min-h-screen flex items-center overflow-hidden bg-background pt-20">
       {/* Background Video with Overlay */}
       <div className="absolute inset-0 z-0">
+        {/*
+        The poster is a real <img> rather than the video's poster attribute so
+        it can use srcset — a phone loads a 29KB copy instead of the 207KB one
+        sized for desktop. It is the Largest Contentful Paint element, so it is
+        eager and high priority; the video fades in over it once idle.
+        */}
+        <img
+          src={HERO_POSTER}
+          srcSet={responsiveSrcSet(HERO_POSTER)}
+          sizes="100vw"
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-80 scale-105"
+        />
+
         {/* Replace the src with actual Instagram loop video when deploying */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          poster="/images/hero-indian.webp"
-          className="w-full h-full object-cover object-center opacity-80 scale-105"
-        >
-          <source src="/videos/hero-loop.mp4" type="video/mp4" />
-        </video>
+        {showVideo && (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover object-center opacity-80 scale-105"
+          >
+            <source src="/videos/hero-loop.mp4" type="video/mp4" />
+          </video>
+        )}
         <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/40 to-transparent" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.5)_100%)]" />
       </div>
@@ -26,11 +90,9 @@ export default function Hero() {
       <div className="container relative z-10 px-4 mx-auto grid lg:grid-cols-12 gap-8 items-center">
         {/* Main Content aligned left */}
         <div className="lg:col-span-8 flex flex-col items-start text-left pt-12 lg:pt-0">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-5xl md:text-7xl lg:text-8xl font-serif mb-6 leading-tight"
+          <h2
+            style={{ animationDelay: "0.2s" }}
+            className="hero-rise text-5xl md:text-7xl lg:text-8xl font-serif mb-6 leading-tight"
           >
             <span className="text-white tracking-tight">Puja</span>
             <span className="text-primary italic tracking-tight">
@@ -40,24 +102,20 @@ export default function Hero() {
             <span className="text-white text-glow font-light">
               Makeup Studio
             </span>
-          </motion.h2>
+          </h2>
 
-          <motion.h3
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 font-light"
+          <h3
+            style={{ animationDelay: "0.4s" }}
+            className="hero-rise text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 font-light"
           >
             Elevating your natural beauty with enterprise-class artistry.
             Top-rated professional makeup services in Gaya, Bihar. Specializing
             in flawless bridal transformations across Bihar, Jharkhand & Delhi NCR.
-          </motion.h3>
+          </h3>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+          <div
+            style={{ animationDelay: "0.6s" }}
+            className="hero-rise flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
           >
             <BookingModal>
               <Button
@@ -80,23 +138,20 @@ export default function Hero() {
               </svg>
               Quick Book
             </a>
-          </motion.div>
+          </div>
         </div>
 
         {/* Badge aligned right */}
         <div className="lg:col-span-4 flex justify-center lg:justify-end mt-12 lg:mt-0 w-full">
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl border border-primary/30 bg-primary/10 text-primary backdrop-blur-md shadow-[0_0_20px_rgba(216,195,165,0.15)]"
+          <div
+            className="hero-slide-in inline-flex items-center gap-3 px-6 py-4 rounded-2xl border border-primary/30 bg-primary/10 text-primary backdrop-blur-md shadow-[0_0_20px_rgba(216,195,165,0.15)]"
           >
             <Sparkles className="w-6 h-6 animate-pulse" />
             <span className="text-base font-medium tracking-wide uppercase leading-tight text-center md:text-left">
               Luxury Bridal
               <br />& Evening Glam
             </span>
-          </motion.div>
+          </div>
         </div>
       </div>
 

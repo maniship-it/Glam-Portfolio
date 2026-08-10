@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { motion, AnimatePresence } from "framer-motion";
+import { responsiveSrcSet, intrinsicSize } from "@/lib/images";
 
 const CATEGORIES = ["All", "Bridal", "Party", "Editorial", "Natural"];
 
@@ -91,8 +92,12 @@ export default function Gallery() {
                 {/* Skeleton loader underneath image */}
                 <div className="absolute inset-0 bg-muted/50 animate-pulse -z-10" />
                 
-                <img 
-                  src={img.src} 
+                <img
+                  src={img.src}
+                  srcSet={responsiveSrcSet(img.src)}
+                  /* Masonry columns: full width on mobile, ~1/2 then ~1/3 of a 1280px container. */
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  {...intrinsicSize(img.src)}
                   alt={`${img.category} makeup look by Puja Glam Makeup Studio`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   loading="lazy"

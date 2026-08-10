@@ -1,0 +1,138 @@
+{
+  "/images/academy-hero.jpg": {
+    "width": 1280,
+    "height": 853,
+    "widths": [
+      400,
+      800,
+      1200
+    ]
+  },
+  "/images/gallery/after.webp": {
+    "width": 1600,
+    "height": 1680,
+    "widths": [
+      400,
+      800,
+      1200
+    ]
+  },
+  "/images/gallery/before.webp": {
+    "width": 1600,
+    "height": 2134,
+    "widths": [
+      400,
+      800,
+      1200
+    ]
+  },
+  "/images/gallery/bridal_indian_1.webp": {
+    "width": 1600,
+    "height": 2400,
+    "widths": [
+      400,
+      800,
+      1200
+    ]
+  },
+  "/images/gallery/bridal_indian_2.webp": {
+    "width": 450,
+    "height": 600,
+    "widths": [
+      400
+    ]
+  },
+  "/images/gallery/bridal_indian_3.webp": {
+    "width": 1600,
+    "height": 2403,
+    "widths": [
+      400,
+      800,
+      1200
+    ]
+  },
+  "/images/gallery/bridal_indian_4.webp": {
+    "width": 1600,
+    "height": 2401,
+    "widths": [
+      400,
+      800,
+      1200
+    ]
+  },
+  "/images/gallery/IMG_7814_result.webp": {
+    "width": 800,
+    "height": 534,
+    "widths": [
+      400
+    ]
+  },
+  "/images/gallery/party_indian_1.webp": {
+    "width": 450,
+    "height": 600,
+    "widths": [
+      400
+    ]
+  },
+  "/images/gallery/party_indian_2.webp": {
+    "width": 450,
+    "height": 600,
+    "widths": [
+      400
+    ]
+  },
+  "/images/gallery/party_indian_3.webp": {
+    "width": 1600,
+    "height": 2124,
+    "widths": [
+      400,
+      800,
+      1200
+    ]
+  },
+  "/images/hero-poster.webp": {
+    "width": 1280,
+    "height": 747,
+    "widths": [
+      400,
+      640,
+      900
+    ]
+  },
+  "/images/instagram/insta_1.webp": {
+    "width": 1600,
+    "height": 2133,
+    "widths": [
+      400,
+      800,
+      1200
+    ]
+  },
+  "/images/instagram/insta_2.webp": {
+    "width": 1600,
+    "height": 2132,
+    "widths": [
+      400,
+      800,
+      1200
+    ]
+  },
+  "/images/instagram/insta_3.webp": {
+    "width": 1600,
+    "height": 1967,
+    "widths": [
+      400,
+      800,
+      1200
+    ]
+  },
+  "/images/instagram/insta_4.webp": {
+    "width": 1801,
+    "height": 1200,
+    "widths": [
+      400,
+      800,
+      1200
+    ]
+  }
+}

@@ -1,6 +1,4 @@
 import { Switch, Route } from "wouter";
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { lazy, Suspense } from "react";
@@ -30,14 +28,18 @@ function Router() {
   );
 }
 
+/*
+No component in the site uses useQuery/useMutation, so QueryClientProvider was
+shipping @tanstack/react-query (~24KB) on the critical path for nothing. The
+configured client is still in src/lib/queryClient.ts — to start using queries
+again, re-import it and wrap <TooltipProvider> in <QueryClientProvider>.
+*/
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Router />
-      </TooltipProvider>
-    </QueryClientProvider>
+    <TooltipProvider>
+      <Toaster />
+      <Router />
+    </TooltipProvider>
   );
 }
 

@@ -110,6 +110,41 @@
     to { opacity: 1; transform: translateY(0); }
   }
   
+  /*
+  Hero entrance animations.
+
+  These replace the framer-motion versions. framer-motion is ~120KB and the
+  hero was the only component on the initial page that pulled it in, so moving
+  these four one-shot entrances to CSS takes the whole library off the critical
+  path — it now ships only with the lazily loaded gallery and academy pages.
+  */
+  @keyframes hero-rise {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes hero-slide-in {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: none; }
+  }
+  .hero-rise,
+  .hero-slide-in {
+    opacity: 0;
+    animation-duration: 0.8s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    animation-fill-mode: forwards;
+  }
+  .hero-rise { animation-name: hero-rise; }
+  .hero-slide-in { animation-name: hero-slide-in; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-rise,
+    .hero-slide-in {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
   @keyframes sparkle {
     0% { transform: scale(0) rotate(0deg); opacity: 1; }
     50% { transform: scale(1.5) rotate(180deg); opacity: 0.8; }

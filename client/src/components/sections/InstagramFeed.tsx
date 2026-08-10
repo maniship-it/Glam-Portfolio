@@ -1,4 +1,5 @@
 import { Instagram } from "lucide-react";
+import { responsiveSrcSet } from "@/lib/images";
 
 export default function InstagramFeed() {
   const posts = [
@@ -28,9 +29,12 @@ export default function InstagramFeed() {
               rel="noreferrer"
               className="relative group aspect-square rounded-xl overflow-hidden block bg-muted"
             >
-              <img 
-                src={post.src} 
-                alt="Instagram post" 
+              <img
+                src={post.src}
+                srcSet={responsiveSrcSet(post.src)}
+                /* 2 columns on mobile, 4 from md up. */
+                sizes="(max-width: 768px) 50vw, 25vw"
+                alt="Instagram post"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 loading="lazy"
                 decoding="async"
