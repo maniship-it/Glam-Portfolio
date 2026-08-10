@@ -73,6 +73,32 @@ Live Website Updated
 
 ---
 
+## 🤖 AI Chat Assistant
+
+The floating "Aditi" chat widget posts to `POST /api/chat` on the same origin.
+That endpoint is implemented once in `server/chat.js` and exposed by two entry points:
+
+| Deployment | Entry point |
+| --- | --- |
+| Vercel (serverless) | `api/chat.js` |
+| Express (`npm run dev` / `npm start`) | `server/routes.ts` |
+
+Both need a Groq API key in the environment — without it the widget falls back to
+a "contact us on WhatsApp" message:
+
+```bash
+# .env (local) or project environment variables (Vercel)
+GROQ_API_KEY=your_groq_api_key
+```
+
+The assistant's persona, services and canonical contact details live in
+`server/trainingData.js` (`BUSINESS_CONTEXT`).
+
+> **Note:** a static-only host cannot serve `/api/chat`. Deploy to Vercel (or run the
+> Express server) so the API route exists.
+
+---
+
 ## 📊 GitHub Stats
 
 <p align="center">

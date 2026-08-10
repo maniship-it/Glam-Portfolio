@@ -4,24 +4,26 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 /*
-IMPORTANT THINGS YOU MUST CHANGE:
-
-1️⃣ Replace API_URL with your deployed backend server
-Example:
-https://pujaglam-ai.onrender.com/chat
-
-2️⃣ Do NOT use localhost for production
-
-3️⃣ Your backend must already be running with:
-server.js
-trainingData.js
-.env
+The chat endpoint is served from the same origin as the site:
+ - Express deployments  -> server/routes.ts
+ - Vercel deployments   -> api/chat.js
+Both delegate to server/chat.js, which needs GROQ_API_KEY in the environment.
 */
 
 const API_URL = "/api/chat";
+
+const FALLBACK_REPLY =
+  "Sorry, I'm having trouble right now. Please try again or WhatsApp us at +91 82100 71659.";
+
 type Message = {
   id: number;
   text: React.ReactNode;
+  /*
+  Plain-text mirror of `text`, used to build the conversation history sent to
+  the API. `text` can be JSX (the greeting is), which has no usable string
+  form — without this the greeting was sent as an empty message.
+  */
+  plain: string;
   isBot: boolean;
   type?: "system" | "message";
 };
@@ -35,6 +37,7 @@ export default function FloatingChatbot() {
     {
       id: 1,
       text: "Aditi has joined the chat.",
+      plain: "Aditi has joined the chat.",
       isBot: true,
       type: "system"
     },
@@ -50,6 +53,8 @@ export default function FloatingChatbot() {
           Makeup Studio. How can I help you sparkle today?
         </>
       ),
+      plain:
+        "Hi there! I'm Aditi from Puja Glam Makeup Studio. How can I help you sparkle today?",
       isBot: true
     }
   ]);
@@ -57,6 +62,10 @@ export default function FloatingChatbot() {
   const [inputText, setInputText] = useState("");
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Monotonic ids: Date.now() collides when two messages land in the same ms.
+  const nextId = useRef(3);
+  const createId = () => nextId.current++;
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({
@@ -79,11 +88,11 @@ const getAIResponse = async (message: string) => {
 
     // take last 6 messages for context (lightweight memory)
     const history = messages
-      .filter(m => m.type !== "system")
+      .filter(m => m.type !== "system" && m.plain.trim() !== "")
       .slice(-6)
       .map(m => ({
         role: m.isBot ? "assistant" : "user",
-        content: typeof m.text === "string" ? m.text : ""
+        content: m.plain
       }));
 
     // add current message
@@ -92,7 +101,7 @@ const getAIResponse = async (message: string) => {
       content: message
     });
 
-    const res = await fetch("/api/chat", {
+    const res = await fetch(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -100,12 +109,21 @@ const getAIResponse = async (message: string) => {
       body: JSON.stringify({ messages: history })
     });
 
-    const data = await res.json();
+    // The API answers with a user-facing `reply` on error statuses too, so
+    // parse the body before deciding this is a failure.
+    const data = await res.json().catch(() => null);
 
-    return data.reply;
+    if (typeof data?.reply === "string" && data.reply.trim() !== "") {
+      return data.reply;
+    }
 
-  } catch {
-    return "Sorry, I'm having trouble right now. Please try again or WhatsApp us.";
+    console.error("Chat request failed:", res.status, data);
+
+    return FALLBACK_REPLY;
+
+  } catch (error) {
+    console.error("Chat request failed:", error);
+    return FALLBACK_REPLY;
   }
 };
 
@@ -124,8 +142,9 @@ const getAIResponse = async (message: string) => {
     const userMessage = inputText.trim();
 
     const newMsg: Message = {
-      id: Date.now(),
+      id: createId(),
       text: userMessage,
+      plain: userMessage,
       isBot: false
     };
 
@@ -139,18 +158,23 @@ const getAIResponse = async (message: string) => {
     CALL AI BACKEND
     */
 
-    const aiReply = await getAIResponse(userMessage);
+    try {
 
-    setMessages(prev => [
-      ...prev,
-      {
-        id: Date.now(),
-        text: aiReply,
-        isBot: true
-      }
-    ]);
+      const aiReply = await getAIResponse(userMessage);
 
-    setIsTyping(false);
+      setMessages(prev => [
+        ...prev,
+        {
+          id: createId(),
+          text: aiReply,
+          plain: aiReply,
+          isBot: true
+        }
+      ]);
+
+    } finally {
+      setIsTyping(false);
+    }
 
   };
 
